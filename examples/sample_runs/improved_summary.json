@@ -1,0 +1,23 @@
+{
+  "agent_name": "improved_agent",
+  "dimension_averages": {
+    "completeness": 1.0,
+    "efficiency": 1.0,
+    "expected_facts": 1.0,
+    "faithfulness": 1.0,
+    "retrieval_grounding": 0.903,
+    "source_attribution": 1.0,
+    "sql_correctness": 1.0,
+    "synthesis": 1.0,
+    "tool_routing": 1.0,
+    "trace_health": 1.0
+  },
+  "failed": 0,
+  "high_severity_claim_count": 0,
+  "overall_score": 0.97,
+  "passed": 15,
+  "run_name": "improved",
+  "suite_id": "customer_risk_v1",
+  "task_count": 15,
+  "unsupported_claim_count": 0
+}

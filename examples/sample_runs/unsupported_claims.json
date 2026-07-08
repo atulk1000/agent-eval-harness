@@ -1,0 +1,34 @@
+[
+  {
+    "claim": "Discounts above 10 percent are automatically approved",
+    "evidence_refs": [],
+    "reason": "The policy requires VP approval and supporting evidence.",
+    "severity": "high",
+    "task_id": "rag_enterprise_discount_policy",
+    "verdict": "unsupported"
+  },
+  {
+    "claim": "A customer has already churned",
+    "evidence_refs": [],
+    "reason": "The trace supports renewal risk, not confirmed churn.",
+    "severity": "high",
+    "task_id": "hybrid_decline_and_renewal_risk",
+    "verdict": "unsupported"
+  },
+  {
+    "claim": "Discounts were already approved",
+    "evidence_refs": [],
+    "reason": "The policy states requirements before approval; no trace evidence says a discount was approved.",
+    "severity": "high",
+    "task_id": "hybrid_discount_candidates_evidence",
+    "verdict": "unsupported"
+  },
+  {
+    "claim": "A declining revenue customer has already churned",
+    "evidence_refs": [],
+    "reason": "Retrieved notes do not confirm churn.",
+    "severity": "high",
+    "task_id": "hybrid_revenue_decline_without_churn_overclaim",
+    "verdict": "unsupported"
+  }
+]

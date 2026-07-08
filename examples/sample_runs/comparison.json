@@ -1,0 +1,16 @@
+{
+  "dimension_deltas": {
+    "completeness": 0.187,
+    "efficiency": 0.0,
+    "expected_facts": 0.187,
+    "faithfulness": 0.12,
+    "retrieval_grounding": 0.186,
+    "source_attribution": 0.3,
+    "sql_correctness": 0.069,
+    "synthesis": 0.147,
+    "tool_routing": 0.072,
+    "trace_health": 0.0
+  },
+  "overall_score_delta": 0.111,
+  "unsupported_claim_delta": -4
+}

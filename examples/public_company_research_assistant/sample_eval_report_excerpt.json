@@ -1,0 +1,36 @@
+{
+  "source_repo": "public-company-research-assistant",
+  "source_file": "evals/latest_eval_report.json",
+  "metrics": {
+    "case_count": 25,
+    "pass_rate": 0.96,
+    "routing_accuracy": 0.9583333333333334,
+    "status_accuracy": 1.0,
+    "company_resolution_accuracy": 1.0,
+    "sql_generation_rate": 1.0,
+    "sql_execution_validity": 0.9375,
+    "retrieval_hit_rate": 1.0,
+    "citation_coverage": 1.0,
+    "faithfulness_proxy": 1.0,
+    "freshness_metadata_rate": 1.0
+  },
+  "representative_failure": {
+    "id": "route_rag_amzn_strategy",
+    "question": "What strategic themes show up in Amazon's latest shareholder commentary?",
+    "expected_route": "rag",
+    "actual_route": "hybrid",
+    "route_match": false,
+    "status_match": true,
+    "company_match": true,
+    "sql_present": true,
+    "sql_rows_nonempty": true,
+    "retrieval_present": true,
+    "retrieval_nonempty": true,
+    "citations_present": true,
+    "faithfulness_proxy_pass": true,
+    "passed": false,
+    "notes": [
+      "expected route=rag, got hybrid"
+    ]
+  }
+}
