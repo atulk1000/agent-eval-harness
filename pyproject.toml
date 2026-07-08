@@ -1,0 +1,23 @@
+[build-system]
+requires = ["setuptools>=69"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "agent-eval-harness"
+version = "0.1.0"
+description = "Trace-based evaluation for hybrid SQL + RAG agents."
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = []
+
+[project.optional-dependencies]
+yaml = ["PyYAML>=6.0"]
+dashboard = ["streamlit>=1.36"]
+dev = ["pytest>=8.0"]
+
+[project.scripts]
+agenteval = "agenteval.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["agenteval*", "agents*"]

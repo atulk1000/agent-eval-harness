@@ -1,0 +1,351 @@
+{
+  "suite_id": "customer_risk_v1",
+  "name": "B2B SaaS Customer Risk Hybrid SQL + RAG Benchmark",
+  "description": "Trace-aware benchmark for SQL-only, RAG-only, and hybrid customer intelligence tasks.",
+  "tasks": [
+    {
+      "id": "sql_declining_enterprise_revenue_q2",
+      "task_type": "sql_only",
+      "prompt": "Which enterprise customers had lower revenue in 2026Q2 than in 2026Q1?",
+      "allowed_tools": ["schema_lookup", "sql_query"],
+      "expected_route": {
+        "required_tools": ["schema_lookup", "sql_query"],
+        "optional_tools": [],
+        "forbidden_tools": ["rag_search", "document_lookup"],
+        "max_tool_calls": 3
+      },
+      "expected_sql": {
+        "required_tables": ["customers", "invoices"],
+        "expected_entities": ["Acme Health", "Northstar Bank", "OmniManufacturing"],
+        "unexpected_entities": ["BrightCart Retail", "CivicCloud Gov", "DataForge Labs"]
+      },
+      "expected_documents": {"relevant_doc_ids": []},
+      "expected_answer_terms": ["Acme Health", "Northstar Bank", "OmniManufacturing"],
+      "unsupported_claim_traps": [
+        {
+          "pattern": "churned|already churned",
+          "claim": "A declining revenue customer has already churned",
+          "severity": "high",
+          "reason": "The SQL result only supports revenue decline, not churn status."
+        }
+      ],
+      "rubric": {"tool_routing": 2, "sql_correctness": 4, "retrieval_grounding": 0, "faithfulness": 2, "synthesis": 0, "efficiency": 1}
+    },
+    {
+      "id": "sql_high_support_ticket_enterprise_q2",
+      "task_type": "sql_only",
+      "prompt": "Which enterprise customers opened more than 20 support tickets in 2026Q2?",
+      "allowed_tools": ["schema_lookup", "sql_query"],
+      "expected_route": {
+        "required_tools": ["schema_lookup", "sql_query"],
+        "optional_tools": [],
+        "forbidden_tools": ["rag_search", "document_lookup"],
+        "max_tool_calls": 3
+      },
+      "expected_sql": {
+        "required_tables": ["customers", "support_tickets"],
+        "expected_entities": ["Acme Health", "OmniManufacturing"],
+        "unexpected_entities": ["Northstar Bank", "BrightCart Retail", "CivicCloud Gov", "DataForge Labs"]
+      },
+      "expected_documents": {"relevant_doc_ids": []},
+      "expected_answer_terms": ["Acme Health", "OmniManufacturing"],
+      "unsupported_claim_traps": [],
+      "rubric": {"tool_routing": 2, "sql_correctness": 4, "retrieval_grounding": 0, "faithfulness": 2, "synthesis": 0, "efficiency": 1}
+    },
+    {
+      "id": "sql_usage_decline_enterprise_q2",
+      "task_type": "sql_only",
+      "prompt": "Which enterprise customers had fewer active seats in 2026Q2 than in 2026Q1?",
+      "allowed_tools": ["schema_lookup", "sql_query"],
+      "expected_route": {
+        "required_tools": ["schema_lookup", "sql_query"],
+        "optional_tools": [],
+        "forbidden_tools": ["rag_search", "document_lookup"],
+        "max_tool_calls": 3
+      },
+      "expected_sql": {
+        "required_tables": ["customers", "product_usage"],
+        "expected_entities": ["Acme Health", "OmniManufacturing"],
+        "unexpected_entities": ["Northstar Bank", "BrightCart Retail", "CivicCloud Gov", "DataForge Labs"]
+      },
+      "expected_documents": {"relevant_doc_ids": []},
+      "expected_answer_terms": ["Acme Health", "OmniManufacturing"],
+      "unsupported_claim_traps": [],
+      "rubric": {"tool_routing": 2, "sql_correctness": 4, "retrieval_grounding": 0, "faithfulness": 2, "synthesis": 0, "efficiency": 1}
+    },
+    {
+      "id": "sql_upcoming_at_risk_renewals",
+      "task_type": "sql_only",
+      "prompt": "Which customers have renewals marked at_risk, and when are those renewals?",
+      "allowed_tools": ["schema_lookup", "sql_query"],
+      "expected_route": {
+        "required_tools": ["schema_lookup", "sql_query"],
+        "optional_tools": [],
+        "forbidden_tools": ["rag_search", "document_lookup"],
+        "max_tool_calls": 3
+      },
+      "expected_sql": {
+        "required_tables": ["customers", "renewals"],
+        "expected_entities": ["Acme Health", "OmniManufacturing"],
+        "unexpected_entities": ["Northstar Bank", "BrightCart Retail", "CivicCloud Gov", "DataForge Labs"]
+      },
+      "expected_documents": {"relevant_doc_ids": []},
+      "expected_answer_terms": ["Acme Health", "2026-08-31", "OmniManufacturing", "2026-07-31"],
+      "unsupported_claim_traps": [],
+      "rubric": {"tool_routing": 2, "sql_correctness": 4, "retrieval_grounding": 0, "faithfulness": 2, "synthesis": 0, "efficiency": 1}
+    },
+    {
+      "id": "sql_enterprise_arr_over_550k",
+      "task_type": "sql_only",
+      "prompt": "Which enterprise customers have ARR above 550000?",
+      "allowed_tools": ["schema_lookup", "sql_query"],
+      "expected_route": {
+        "required_tools": ["schema_lookup", "sql_query"],
+        "optional_tools": [],
+        "forbidden_tools": ["rag_search", "document_lookup"],
+        "max_tool_calls": 3
+      },
+      "expected_sql": {
+        "required_tables": ["customers", "subscriptions"],
+        "expected_entities": ["Northstar Bank", "CivicCloud Gov", "OmniManufacturing"],
+        "unexpected_entities": ["Acme Health", "BrightCart Retail", "DataForge Labs"]
+      },
+      "expected_documents": {"relevant_doc_ids": []},
+      "expected_answer_terms": ["Northstar Bank", "CivicCloud Gov", "OmniManufacturing"],
+      "unsupported_claim_traps": [],
+      "rubric": {"tool_routing": 2, "sql_correctness": 4, "retrieval_grounding": 0, "faithfulness": 2, "synthesis": 0, "efficiency": 1}
+    },
+    {
+      "id": "rag_enterprise_discount_policy",
+      "task_type": "rag_only",
+      "prompt": "What does the enterprise renewal policy require before approving a discount above 10 percent?",
+      "allowed_tools": ["rag_search", "document_lookup"],
+      "expected_route": {
+        "required_tools": ["rag_search"],
+        "optional_tools": ["document_lookup"],
+        "forbidden_tools": ["schema_lookup", "sql_query"],
+        "max_tool_calls": 3
+      },
+      "expected_sql": {"required_tables": [], "expected_entities": [], "unexpected_entities": []},
+      "expected_documents": {"relevant_doc_ids": ["renewal_policy_enterprise"]},
+      "expected_answer_terms": ["VP approval", "business case", "renewal risk assessment"],
+      "unsupported_claim_traps": [
+        {
+          "pattern": "automatically approved|always approved",
+          "claim": "Discounts above 10 percent are automatically approved",
+          "severity": "high",
+          "reason": "The policy requires VP approval and supporting evidence."
+        }
+      ],
+      "rubric": {"tool_routing": 2, "sql_correctness": 0, "retrieval_grounding": 3, "faithfulness": 3, "synthesis": 0, "efficiency": 1}
+    },
+    {
+      "id": "rag_acme_contract_termination",
+      "task_type": "rag_only",
+      "prompt": "What does Acme Health's contract excerpt say about early termination?",
+      "allowed_tools": ["rag_search", "document_lookup"],
+      "expected_route": {
+        "required_tools": ["rag_search"],
+        "optional_tools": ["document_lookup"],
+        "forbidden_tools": ["schema_lookup", "sql_query"],
+        "max_tool_calls": 3
+      },
+      "expected_sql": {"required_tables": [], "expected_entities": [], "unexpected_entities": []},
+      "expected_documents": {"relevant_doc_ids": ["contract_acme_2026"]},
+      "expected_answer_terms": ["material breach", "uncured", "30 days"],
+      "unsupported_claim_traps": [
+        {
+          "pattern": "cancel anytime|terminate anytime",
+          "claim": "Acme can terminate anytime",
+          "severity": "high",
+          "reason": "The contract says early termination applies only after an uncured material breach."
+        }
+      ],
+      "rubric": {"tool_routing": 2, "sql_correctness": 0, "retrieval_grounding": 3, "faithfulness": 3, "synthesis": 0, "efficiency": 1}
+    },
+    {
+      "id": "rag_omni_support_issue_summary",
+      "task_type": "rag_only",
+      "prompt": "What support issues did OmniManufacturing face in Q2?",
+      "allowed_tools": ["rag_search", "document_lookup"],
+      "expected_route": {
+        "required_tools": ["rag_search"],
+        "optional_tools": ["document_lookup"],
+        "forbidden_tools": ["schema_lookup", "sql_query"],
+        "max_tool_calls": 3
+      },
+      "expected_sql": {"required_tables": [], "expected_entities": [], "unexpected_entities": []},
+      "expected_documents": {"relevant_doc_ids": ["support_summary_omni_q2", "account_note_omni_2026_06"]},
+      "expected_answer_terms": ["integration", "data sync", "defects"],
+      "unsupported_claim_traps": [],
+      "rubric": {"tool_routing": 2, "sql_correctness": 0, "retrieval_grounding": 3, "faithfulness": 3, "synthesis": 0, "efficiency": 1}
+    },
+    {
+      "id": "rag_civic_success_signal",
+      "task_type": "rag_only",
+      "prompt": "What positive customer success signal appears for CivicCloud Gov in Q2?",
+      "allowed_tools": ["rag_search", "document_lookup"],
+      "expected_route": {
+        "required_tools": ["rag_search"],
+        "optional_tools": ["document_lookup"],
+        "forbidden_tools": ["schema_lookup", "sql_query"],
+        "max_tool_calls": 3
+      },
+      "expected_sql": {"required_tables": [], "expected_entities": [], "unexpected_entities": []},
+      "expected_documents": {"relevant_doc_ids": ["customer_success_civic_q2"]},
+      "expected_answer_terms": ["expanded adoption", "praised reporting", "additional use cases"],
+      "unsupported_claim_traps": [],
+      "rubric": {"tool_routing": 2, "sql_correctness": 0, "retrieval_grounding": 3, "faithfulness": 3, "synthesis": 0, "efficiency": 1}
+    },
+    {
+      "id": "rag_support_escalation_policy",
+      "task_type": "rag_only",
+      "prompt": "When does the support policy require a customer-facing remediation plan?",
+      "allowed_tools": ["rag_search", "document_lookup"],
+      "expected_route": {
+        "required_tools": ["rag_search"],
+        "optional_tools": ["document_lookup"],
+        "forbidden_tools": ["schema_lookup", "sql_query"],
+        "max_tool_calls": 3
+      },
+      "expected_sql": {"required_tables": [], "expected_entities": [], "unexpected_entities": []},
+      "expected_documents": {"relevant_doc_ids": ["support_policy_escalation"]},
+      "expected_answer_terms": ["high-severity", "production workflows", "renewal commitments", "remediation plan"],
+      "unsupported_claim_traps": [],
+      "rubric": {"tool_routing": 2, "sql_correctness": 0, "retrieval_grounding": 3, "faithfulness": 3, "synthesis": 0, "efficiency": 1}
+    },
+    {
+      "id": "hybrid_decline_and_renewal_risk",
+      "task_type": "hybrid_sql_rag",
+      "prompt": "Which enterprise customers had declining Q2 revenue, and do their account notes suggest renewal risk?",
+      "allowed_tools": ["schema_lookup", "sql_query", "rag_search", "document_lookup"],
+      "expected_route": {
+        "required_tools": ["schema_lookup", "sql_query", "rag_search"],
+        "optional_tools": ["document_lookup"],
+        "forbidden_tools": [],
+        "max_tool_calls": 6
+      },
+      "expected_sql": {
+        "required_tables": ["customers", "invoices"],
+        "expected_entities": ["Acme Health", "Northstar Bank", "OmniManufacturing"],
+        "unexpected_entities": ["BrightCart Retail", "CivicCloud Gov", "DataForge Labs"]
+      },
+      "expected_documents": {"relevant_doc_ids": ["account_note_acme_2026_06", "account_note_northstar_2026_06", "account_note_omni_2026_06"]},
+      "expected_answer_terms": ["Acme Health", "Northstar Bank", "OmniManufacturing", "onboarding", "executive sponsor", "integration defects"],
+      "unsupported_claim_traps": [
+        {
+          "pattern": "already churned|has churned",
+          "claim": "A customer has already churned",
+          "severity": "high",
+          "reason": "The trace supports renewal risk, not confirmed churn."
+        }
+      ],
+      "rubric": {"tool_routing": 2, "sql_correctness": 2, "retrieval_grounding": 2, "faithfulness": 2, "synthesis": 2, "efficiency": 1}
+    },
+    {
+      "id": "hybrid_usage_drop_and_support_context",
+      "task_type": "hybrid_sql_rag",
+      "prompt": "Which enterprise customers had active-seat usage decline in Q2, and what support context explains the risk?",
+      "allowed_tools": ["schema_lookup", "sql_query", "rag_search", "document_lookup"],
+      "expected_route": {
+        "required_tools": ["schema_lookup", "sql_query", "rag_search"],
+        "optional_tools": ["document_lookup"],
+        "forbidden_tools": [],
+        "max_tool_calls": 6
+      },
+      "expected_sql": {
+        "required_tables": ["customers", "product_usage"],
+        "expected_entities": ["Acme Health", "OmniManufacturing"],
+        "unexpected_entities": ["Northstar Bank", "BrightCart Retail", "CivicCloud Gov", "DataForge Labs"]
+      },
+      "expected_documents": {"relevant_doc_ids": ["support_summary_acme_q2", "support_summary_omni_q2", "account_note_omni_2026_06"]},
+      "expected_answer_terms": ["Acme Health", "OmniManufacturing", "SSO", "data sync", "integration"],
+      "unsupported_claim_traps": [
+        {
+          "pattern": "pricing caused|price increase caused",
+          "claim": "Pricing caused the usage decline",
+          "severity": "medium",
+          "reason": "The retrieved support context discusses onboarding, SSO, and integration issues, not pricing as the cause."
+        }
+      ],
+      "rubric": {"tool_routing": 2, "sql_correctness": 2, "retrieval_grounding": 2, "faithfulness": 2, "synthesis": 2, "efficiency": 1}
+    },
+    {
+      "id": "hybrid_high_tickets_and_policy_action",
+      "task_type": "hybrid_sql_rag",
+      "prompt": "Which enterprise customers had more than 20 Q2 support tickets, and what policy action should be considered?",
+      "allowed_tools": ["schema_lookup", "sql_query", "rag_search", "document_lookup"],
+      "expected_route": {
+        "required_tools": ["schema_lookup", "sql_query", "rag_search"],
+        "optional_tools": ["document_lookup"],
+        "forbidden_tools": [],
+        "max_tool_calls": 6
+      },
+      "expected_sql": {
+        "required_tables": ["customers", "support_tickets"],
+        "expected_entities": ["Acme Health", "OmniManufacturing"],
+        "unexpected_entities": ["Northstar Bank", "BrightCart Retail", "CivicCloud Gov", "DataForge Labs"]
+      },
+      "expected_documents": {"relevant_doc_ids": ["support_policy_escalation"]},
+      "expected_answer_terms": ["Acme Health", "OmniManufacturing", "remediation plan", "high-severity"],
+      "unsupported_claim_traps": [],
+      "rubric": {"tool_routing": 2, "sql_correctness": 2, "retrieval_grounding": 2, "faithfulness": 2, "synthesis": 2, "efficiency": 1}
+    },
+    {
+      "id": "hybrid_discount_candidates_evidence",
+      "task_type": "hybrid_sql_rag",
+      "prompt": "For at-risk renewals, what evidence is required before approving a discount above 10 percent?",
+      "allowed_tools": ["schema_lookup", "sql_query", "rag_search", "document_lookup"],
+      "expected_route": {
+        "required_tools": ["schema_lookup", "sql_query", "rag_search"],
+        "optional_tools": ["document_lookup"],
+        "forbidden_tools": [],
+        "max_tool_calls": 6
+      },
+      "expected_sql": {
+        "required_tables": ["customers", "renewals"],
+        "expected_entities": ["Acme Health", "OmniManufacturing"],
+        "unexpected_entities": ["Northstar Bank", "BrightCart Retail", "CivicCloud Gov", "DataForge Labs"]
+      },
+      "expected_documents": {"relevant_doc_ids": ["renewal_policy_enterprise"]},
+      "expected_answer_terms": ["Acme Health", "OmniManufacturing", "VP approval", "business case", "renewal risk assessment"],
+      "unsupported_claim_traps": [
+        {
+          "pattern": "discounts? (was|were|is|are) approved|approved discount",
+          "claim": "Discounts were already approved",
+          "severity": "high",
+          "reason": "The policy states requirements before approval; no trace evidence says a discount was approved."
+        }
+      ],
+      "rubric": {"tool_routing": 2, "sql_correctness": 2, "retrieval_grounding": 2, "faithfulness": 2, "synthesis": 2, "efficiency": 1}
+    },
+    {
+      "id": "hybrid_revenue_decline_without_churn_overclaim",
+      "task_type": "hybrid_sql_rag",
+      "prompt": "Which enterprise customers had declining Q2 revenue, and is there evidence that any of them have already churned?",
+      "allowed_tools": ["schema_lookup", "sql_query", "rag_search", "document_lookup"],
+      "expected_route": {
+        "required_tools": ["schema_lookup", "sql_query", "rag_search"],
+        "optional_tools": ["document_lookup"],
+        "forbidden_tools": [],
+        "max_tool_calls": 6
+      },
+      "expected_sql": {
+        "required_tables": ["customers", "invoices"],
+        "expected_entities": ["Acme Health", "Northstar Bank", "OmniManufacturing"],
+        "unexpected_entities": ["BrightCart Retail", "CivicCloud Gov", "DataForge Labs"]
+      },
+      "expected_documents": {"relevant_doc_ids": ["account_note_acme_2026_06", "account_note_northstar_2026_06", "account_note_omni_2026_06"]},
+      "expected_answer_terms": ["Acme Health", "Northstar Bank", "OmniManufacturing", "no evidence", "churned"],
+      "unsupported_claim_traps": [
+        {
+          "pattern": "already churned|has churned",
+          "claim": "A declining revenue customer has already churned",
+          "severity": "high",
+          "reason": "Retrieved notes do not confirm churn."
+        }
+      ],
+      "rubric": {"tool_routing": 2, "sql_correctness": 2, "retrieval_grounding": 2, "faithfulness": 2, "synthesis": 2, "efficiency": 1}
+    }
+  ]
+}

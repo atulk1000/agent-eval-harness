@@ -1,0 +1,11 @@
+__pycache__/
+*.py[cod]
+
+.venv/
+venv/
+
+data/docs/documents.json
+data/sqlite/*.db
+
+runs/*
+!runs/.gitkeep
