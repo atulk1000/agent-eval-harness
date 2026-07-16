@@ -1,21 +1,10 @@
 # Public Company Research Assistant Bridge
 
-This example documents how AgentEval Harness can connect to an external SQL + RAG project in the same portfolio: `public-company-research-assistant`.
+This example implements the AgentEval bridge to the external SQL + RAG project `public-company-research-assistant`.
 
 ## Current State
 
-Public Company Research Assistant already has an evaluation layer under its `evals/` directory. It tracks routing, SQL evidence, retrieval evidence, citation coverage, company resolution, and faithfulness proxies for SEC-backed financial research questions.
-
-Its latest checked-in evaluation summary reports:
-
-- 25 benchmark cases
-- 96% pass rate
-- 95.83% routing accuracy
-- 100% retrieval hit rate
-- 100% citation coverage
-- 100% faithfulness proxy
-
-The current PCA evaluator does not yet emit AgentEval's full trace schema. It records case-level outcomes rather than every observable tool call as `schema_lookup`, `sql_query`, `rag_search`, or `document_lookup` events.
+The bridge accepts PCA-shaped responses containing generated SQL, SQL rows, retrieved filing chunks, the final answer, route, and planning metadata. AgentEval captures or accepts those raw responses before adapting them, so evidence provenance is retained instead of inferred from aggregate outcome flags.
 
 ## Why This Bridge Matters
 
@@ -24,8 +13,8 @@ The built-in AgentEval demo proves the harness locally with a fictional B2B SaaS
 This bridge shows the intended external-agent path:
 
 ```text
-Public Company Research Assistant eval output
-  -> adapter
+PCA raw answer_question response
+  -> AgentEval PCA adapter
   -> AgentEval trace schema
   -> imported trace scoring
   -> comparable report/dashboard
@@ -33,25 +22,33 @@ Public Company Research Assistant eval output
 
 That makes AgentEval look like a reusable evaluation framework rather than a one-off demo.
 
-## v1.1 Boundary
+## Bridge Implementation
 
-v1.1 documents the adapter contract and includes a real excerpt from the PCA eval report.
+The bridge includes:
 
-It does not pretend PCA already emits full AgentEval traces.
+- `benchmark.json`: one SQL, one RAG, and one hybrid bridge task.
+- `raw_responses.jsonl`: PCA-shaped contract fixtures.
+- `proof/traces.jsonl`: adapted versioned traces.
+- `proof/claims.jsonl`, `evidence.jsonl`, `claim_verdicts.jsonl`, and report artifacts: v1.3 scored proof.
+- `agenteval/adapters/public_company.py`: offline response adapter and capture launcher.
+- `agenteval/adapters/pca_capture_worker.py`: standalone worker that runs in PCA's environment.
 
-## v1.2 Target
-
-Add a PCA trace exporter that captures:
-
-- route decision as an agent event
-- generated SQL as a `sql_query` event
-- SQL rows as `sql_query.output.rows`
-- retrieved filing chunks as `rag_search.output.documents`
-- final answer and citations as `final_answer`
-- route mismatch and citation/faithfulness outcomes as score metadata
-
-Once that exporter exists, AgentEval can score PCA runs through:
+Adapt and score the checked-in contract fixtures:
 
 ```powershell
-python -m agenteval.cli score --trace examples/public_company_research_assistant/trace.jsonl --benchmark examples/public_company_research_assistant/benchmark.yaml --agent-name public_company_research_assistant
+python -m agenteval.cli adapt-pca --responses examples/public_company_research_assistant/raw_responses.jsonl --benchmark examples/public_company_research_assistant/benchmark.json --out-trace runs/pca/traces.jsonl
+python -m agenteval.cli validate --trace runs/pca/traces.jsonl
+python -m agenteval.cli score --trace runs/pca/traces.jsonl --benchmark examples/public_company_research_assistant/benchmark.json --agent-name public_company_research_assistant --out runs/pca-scored
 ```
+
+Capture fresh responses using PCA's own Python environment:
+
+```powershell
+python -m agenteval.cli capture-pca --pca-repo ../public-company-research-assistant --pca-python ../public-company-research-assistant/.venv/Scripts/python.exe --benchmark examples/public_company_research_assistant/benchmark.json --out-responses runs/pca/raw_responses.jsonl
+```
+
+## Honesty Boundary
+
+The checked-in responses are explicitly marked `contract_fixture`. The v1.3 result is one pass, one fail, and one `needs_review`, with two supported, two partially supported, and one unresolved claim. The unresolved and partial results expose ticker-to-company alias and semantic synthesis evidence that the portable trace does not establish by itself. This is not a fresh measurement of PCA's live quality.
+
+The adapter never converts `sql_present=true` or `retrieval_present=true` summary flags into evidence. Summary-only inputs fail with a message requesting raw PCA responses.

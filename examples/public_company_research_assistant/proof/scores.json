@@ -1,0 +1,1316 @@
+[
+  {
+    "claim_evaluation": {
+      "claims": [
+        {
+          "assertion_mode": "asserted",
+          "claim_id": "claim_pca_sql_margin_01_3f936301",
+          "claim_type": "entity_fact",
+          "extraction_warnings": [],
+          "extractor": {
+            "kind": "deterministic",
+            "model": "rules-v1",
+            "prompt_version": "claim_extraction_v1",
+            "provider": "local"
+          },
+          "ordinal": 1,
+          "run_id": "pca_pca_sql_margin",
+          "schema_version": "1.0",
+          "source_requirement": "sql",
+          "source_span": {
+            "end": 77,
+            "start": 0
+          },
+          "source_text": "Microsoft had the highest operating margin in the supplied structured result.",
+          "subject": "Microsoft",
+          "task_id": "pca_sql_margin",
+          "text": "Microsoft had the highest operating margin in the supplied structured result."
+        }
+      ],
+      "evidence": [
+        {
+          "content": "operating_margin=0.445, ticker=MSFT",
+          "evidence_id": "evidence_4757e2cd5112",
+          "provenance": {
+            "event_step": 1,
+            "item_index": 0,
+            "tool_input": {
+              "query": "SELECT ticker, operating_margin FROM company_metrics ORDER BY operating_margin DESC LIMIT 1"
+            },
+            "trace_run_id": "pca_pca_sql_margin"
+          },
+          "run_id": "pca_pca_sql_margin",
+          "schema_version": "1.0",
+          "source_type": "sql_row",
+          "structured_payload": {
+            "operating_margin": 0.445,
+            "ticker": "MSFT"
+          },
+          "task_id": "pca_sql_margin",
+          "tool": "sql_query",
+          "tool_step": 1
+        }
+      ],
+      "judge_calls": [],
+      "metrics": {
+        "claim_count": 1,
+        "hard_gate_failures": [],
+        "high_severity_issue_count": 0,
+        "issue_count": 1,
+        "needs_review_count": 0,
+        "score": 0.5,
+        "status": "fail",
+        "verdict_counts": {
+          "partially_supported": 1
+        }
+      },
+      "verdicts": [
+        {
+          "claim_id": "claim_pca_sql_margin_01_3f936301",
+          "confidence": 0.76,
+          "evidence_considered": [
+            "evidence_4757e2cd5112"
+          ],
+          "evidence_refs": [
+            "evidence_4757e2cd5112"
+          ],
+          "judge_path": "deterministic",
+          "reason": "The evidence supports the core topic but not every material qualifier.",
+          "requires_review": false,
+          "risk_level": "low",
+          "run_id": "pca_pca_sql_margin",
+          "schema_version": "1.0",
+          "selection": {
+            "candidate_count": 1,
+            "candidate_limit": 8,
+            "excluded_count": 0
+          },
+          "severity": "low",
+          "severity_reason": "A material part of the claim is not supported.",
+          "task_id": "pca_sql_margin",
+          "unsupported_parts": [
+            "highest",
+            "microsoft",
+            "structur"
+          ],
+          "verdict": "partially_supported"
+        }
+      ]
+    },
+    "dimension_scores": {
+      "completeness": 1.0,
+      "efficiency": 1.0,
+      "expected_facts": 1.0,
+      "faithfulness": 0.5,
+      "retrieval_grounding": 1.0,
+      "source_attribution": 1.0,
+      "sql_correctness": 1.0,
+      "synthesis": 1.0,
+      "tool_routing": 1.0,
+      "trace_health": 1.0
+    },
+    "efficiency": {
+      "failure_labels": [],
+      "max_tool_calls": 1,
+      "score": 1.0,
+      "tool_calls": 1
+    },
+    "expected_facts": {
+      "matched_terms": [],
+      "missing_terms": [],
+      "score": 1.0
+    },
+    "failure_labels": [
+      "unsupported_claim"
+    ],
+    "judges": {
+      "claim_evaluation": {
+        "claims": [
+          {
+            "assertion_mode": "asserted",
+            "claim_id": "claim_pca_sql_margin_01_3f936301",
+            "claim_type": "entity_fact",
+            "extraction_warnings": [],
+            "extractor": {
+              "kind": "deterministic",
+              "model": "rules-v1",
+              "prompt_version": "claim_extraction_v1",
+              "provider": "local"
+            },
+            "ordinal": 1,
+            "run_id": "pca_pca_sql_margin",
+            "schema_version": "1.0",
+            "source_requirement": "sql",
+            "source_span": {
+              "end": 77,
+              "start": 0
+            },
+            "source_text": "Microsoft had the highest operating margin in the supplied structured result.",
+            "subject": "Microsoft",
+            "task_id": "pca_sql_margin",
+            "text": "Microsoft had the highest operating margin in the supplied structured result."
+          }
+        ],
+        "evidence": [
+          {
+            "content": "operating_margin=0.445, ticker=MSFT",
+            "evidence_id": "evidence_4757e2cd5112",
+            "provenance": {
+              "event_step": 1,
+              "item_index": 0,
+              "tool_input": {
+                "query": "SELECT ticker, operating_margin FROM company_metrics ORDER BY operating_margin DESC LIMIT 1"
+              },
+              "trace_run_id": "pca_pca_sql_margin"
+            },
+            "run_id": "pca_pca_sql_margin",
+            "schema_version": "1.0",
+            "source_type": "sql_row",
+            "structured_payload": {
+              "operating_margin": 0.445,
+              "ticker": "MSFT"
+            },
+            "task_id": "pca_sql_margin",
+            "tool": "sql_query",
+            "tool_step": 1
+          }
+        ],
+        "judge_calls": [],
+        "metrics": {
+          "claim_count": 1,
+          "hard_gate_failures": [],
+          "high_severity_issue_count": 0,
+          "issue_count": 1,
+          "needs_review_count": 0,
+          "score": 0.5,
+          "status": "fail",
+          "verdict_counts": {
+            "partially_supported": 1
+          }
+        },
+        "verdicts": [
+          {
+            "claim_id": "claim_pca_sql_margin_01_3f936301",
+            "confidence": 0.76,
+            "evidence_considered": [
+              "evidence_4757e2cd5112"
+            ],
+            "evidence_refs": [
+              "evidence_4757e2cd5112"
+            ],
+            "judge_path": "deterministic",
+            "reason": "The evidence supports the core topic but not every material qualifier.",
+            "requires_review": false,
+            "risk_level": "low",
+            "run_id": "pca_pca_sql_margin",
+            "schema_version": "1.0",
+            "selection": {
+              "candidate_count": 1,
+              "candidate_limit": 8,
+              "excluded_count": 0
+            },
+            "severity": "low",
+            "severity_reason": "A material part of the claim is not supported.",
+            "task_id": "pca_sql_margin",
+            "unsupported_parts": [
+              "highest",
+              "microsoft",
+              "structur"
+            ],
+            "verdict": "partially_supported"
+          }
+        ]
+      },
+      "completeness_score": 1.0,
+      "failure_labels": [
+        "unsupported_claim"
+      ],
+      "faithfulness_score": 0.5,
+      "faithfulness_status": "fail",
+      "source_attribution_score": 1.0,
+      "synthesis_score": 1.0,
+      "unsupported_claims": [
+        {
+          "claim": "Microsoft had the highest operating margin in the supplied structured result.",
+          "claim_id": "claim_pca_sql_margin_01_3f936301",
+          "evidence_refs": [
+            "evidence_4757e2cd5112"
+          ],
+          "reason": "The evidence supports the core topic but not every material qualifier.",
+          "severity": "low",
+          "verdict": "partially_supported"
+        }
+      ]
+    },
+    "overall_score": 1.0,
+    "retrieval": {
+      "applicable": false,
+      "expected_docs_found": [],
+      "failure_labels": [],
+      "irrelevant_docs": [],
+      "missing_docs": [],
+      "score": 1.0
+    },
+    "sql_correctness": {
+      "applicable": true,
+      "failure_labels": [],
+      "found_entities": [
+        "MSFT"
+      ],
+      "missing_expected_rows": [],
+      "missing_required_tables": [],
+      "required_tables_used": [
+        "company_metrics"
+      ],
+      "score": 1.0,
+      "unexpected_rows": []
+    },
+    "status": "fail",
+    "task_id": "pca_sql_margin",
+    "task_type": "sql_only",
+    "tool_routing": {
+      "actual_route": [
+        "sql_query"
+      ],
+      "failure_labels": [],
+      "forbidden_tools_used": [],
+      "missing_tools": [],
+      "score": 1.0
+    },
+    "trace_errors": {
+      "errors": [],
+      "failure_labels": [],
+      "score": 1.0
+    },
+    "unsupported_claims": [
+      {
+        "claim": "Microsoft had the highest operating margin in the supplied structured result.",
+        "claim_id": "claim_pca_sql_margin_01_3f936301",
+        "evidence_refs": [
+          "evidence_4757e2cd5112"
+        ],
+        "reason": "The evidence supports the core topic but not every material qualifier.",
+        "severity": "low",
+        "verdict": "partially_supported"
+      }
+    ]
+  },
+  {
+    "claim_evaluation": {
+      "claims": [
+        {
+          "assertion_mode": "asserted",
+          "claim_id": "claim_pca_rag_ai_themes_01_fd469fdc",
+          "claim_type": "entity_fact",
+          "extraction_warnings": [],
+          "extractor": {
+            "kind": "deterministic",
+            "model": "rules-v1",
+            "prompt_version": "claim_extraction_v1",
+            "provider": "local"
+          },
+          "ordinal": 1,
+          "run_id": "pca_pca_rag_ai_themes",
+          "schema_version": "1.0",
+          "source_requirement": "rag",
+          "source_span": {
+            "end": 84,
+            "start": 0
+          },
+          "source_text": "Alphabet's commentary emphasizes AI infrastructure, models, and product integration.",
+          "subject": "Alphabet",
+          "task_id": "pca_rag_ai_themes",
+          "text": "Alphabet's commentary emphasizes AI infrastructure, models, and product integration."
+        }
+      ],
+      "evidence": [
+        {
+          "content": "Alphabet described AI investment across infrastructure, models, and products.",
+          "evidence_id": "evidence_04fe287a1007",
+          "provenance": {
+            "event_step": 1,
+            "item_index": 0,
+            "tool_input": null,
+            "trace_run_id": "pca_pca_rag_ai_themes"
+          },
+          "run_id": "pca_pca_rag_ai_themes",
+          "schema_version": "1.0",
+          "source_type": "document_chunk",
+          "structured_payload": {
+            "doc_id": "GOOGL_10-Q_ai_commentary_1",
+            "doc_type": "10-Q",
+            "metadata": {
+              "doc_date": "2026-04-25",
+              "doc_type": "10-Q",
+              "ticker": "GOOGL"
+            },
+            "score": 0.91,
+            "text": "Alphabet described AI investment across infrastructure, models, and products.",
+            "title": "GOOGL_10-Q_ai_commentary_1"
+          },
+          "task_id": "pca_rag_ai_themes",
+          "tool": "rag_search",
+          "tool_step": 1
+        }
+      ],
+      "judge_calls": [],
+      "metrics": {
+        "claim_count": 1,
+        "hard_gate_failures": [],
+        "high_severity_issue_count": 0,
+        "issue_count": 0,
+        "needs_review_count": 0,
+        "score": 1.0,
+        "status": "pass",
+        "verdict_counts": {
+          "supported": 1
+        }
+      },
+      "verdicts": [
+        {
+          "claim_id": "claim_pca_rag_ai_themes_01_fd469fdc",
+          "confidence": 0.97,
+          "evidence_considered": [
+            "evidence_04fe287a1007"
+          ],
+          "evidence_refs": [
+            "evidence_04fe287a1007"
+          ],
+          "judge_path": "deterministic",
+          "reason": "The material entities and details are present in the selected trace evidence.",
+          "requires_review": false,
+          "risk_level": "low",
+          "run_id": "pca_pca_rag_ai_themes",
+          "schema_version": "1.0",
+          "selection": {
+            "candidate_count": 1,
+            "candidate_limit": 8,
+            "excluded_count": 0
+          },
+          "severity": "none",
+          "severity_reason": "The claim is supported; potential risk remains available for weighting.",
+          "task_id": "pca_rag_ai_themes",
+          "unsupported_parts": [],
+          "verdict": "supported"
+        }
+      ]
+    },
+    "dimension_scores": {
+      "completeness": 1.0,
+      "efficiency": 1.0,
+      "expected_facts": 1.0,
+      "faithfulness": 1.0,
+      "retrieval_grounding": 1.0,
+      "source_attribution": 1.0,
+      "sql_correctness": 1.0,
+      "synthesis": 1.0,
+      "tool_routing": 1.0,
+      "trace_health": 1.0
+    },
+    "efficiency": {
+      "failure_labels": [],
+      "max_tool_calls": 1,
+      "score": 1.0,
+      "tool_calls": 1
+    },
+    "expected_facts": {
+      "matched_terms": [],
+      "missing_terms": [],
+      "score": 1.0
+    },
+    "failure_labels": [],
+    "judges": {
+      "claim_evaluation": {
+        "claims": [
+          {
+            "assertion_mode": "asserted",
+            "claim_id": "claim_pca_rag_ai_themes_01_fd469fdc",
+            "claim_type": "entity_fact",
+            "extraction_warnings": [],
+            "extractor": {
+              "kind": "deterministic",
+              "model": "rules-v1",
+              "prompt_version": "claim_extraction_v1",
+              "provider": "local"
+            },
+            "ordinal": 1,
+            "run_id": "pca_pca_rag_ai_themes",
+            "schema_version": "1.0",
+            "source_requirement": "rag",
+            "source_span": {
+              "end": 84,
+              "start": 0
+            },
+            "source_text": "Alphabet's commentary emphasizes AI infrastructure, models, and product integration.",
+            "subject": "Alphabet",
+            "task_id": "pca_rag_ai_themes",
+            "text": "Alphabet's commentary emphasizes AI infrastructure, models, and product integration."
+          }
+        ],
+        "evidence": [
+          {
+            "content": "Alphabet described AI investment across infrastructure, models, and products.",
+            "evidence_id": "evidence_04fe287a1007",
+            "provenance": {
+              "event_step": 1,
+              "item_index": 0,
+              "tool_input": null,
+              "trace_run_id": "pca_pca_rag_ai_themes"
+            },
+            "run_id": "pca_pca_rag_ai_themes",
+            "schema_version": "1.0",
+            "source_type": "document_chunk",
+            "structured_payload": {
+              "doc_id": "GOOGL_10-Q_ai_commentary_1",
+              "doc_type": "10-Q",
+              "metadata": {
+                "doc_date": "2026-04-25",
+                "doc_type": "10-Q",
+                "ticker": "GOOGL"
+              },
+              "score": 0.91,
+              "text": "Alphabet described AI investment across infrastructure, models, and products.",
+              "title": "GOOGL_10-Q_ai_commentary_1"
+            },
+            "task_id": "pca_rag_ai_themes",
+            "tool": "rag_search",
+            "tool_step": 1
+          }
+        ],
+        "judge_calls": [],
+        "metrics": {
+          "claim_count": 1,
+          "hard_gate_failures": [],
+          "high_severity_issue_count": 0,
+          "issue_count": 0,
+          "needs_review_count": 0,
+          "score": 1.0,
+          "status": "pass",
+          "verdict_counts": {
+            "supported": 1
+          }
+        },
+        "verdicts": [
+          {
+            "claim_id": "claim_pca_rag_ai_themes_01_fd469fdc",
+            "confidence": 0.97,
+            "evidence_considered": [
+              "evidence_04fe287a1007"
+            ],
+            "evidence_refs": [
+              "evidence_04fe287a1007"
+            ],
+            "judge_path": "deterministic",
+            "reason": "The material entities and details are present in the selected trace evidence.",
+            "requires_review": false,
+            "risk_level": "low",
+            "run_id": "pca_pca_rag_ai_themes",
+            "schema_version": "1.0",
+            "selection": {
+              "candidate_count": 1,
+              "candidate_limit": 8,
+              "excluded_count": 0
+            },
+            "severity": "none",
+            "severity_reason": "The claim is supported; potential risk remains available for weighting.",
+            "task_id": "pca_rag_ai_themes",
+            "unsupported_parts": [],
+            "verdict": "supported"
+          }
+        ]
+      },
+      "completeness_score": 1.0,
+      "failure_labels": [],
+      "faithfulness_score": 1.0,
+      "faithfulness_status": "pass",
+      "source_attribution_score": 1.0,
+      "synthesis_score": 1.0,
+      "unsupported_claims": []
+    },
+    "overall_score": 1.0,
+    "retrieval": {
+      "applicable": true,
+      "expected_docs_found": [
+        "GOOGL_10-Q_ai_commentary_1"
+      ],
+      "failure_labels": [],
+      "irrelevant_docs": [],
+      "missing_docs": [],
+      "score": 1.0
+    },
+    "sql_correctness": {
+      "applicable": false,
+      "failure_labels": [],
+      "missing_expected_rows": [],
+      "score": 1.0,
+      "unexpected_rows": []
+    },
+    "status": "pass",
+    "task_id": "pca_rag_ai_themes",
+    "task_type": "rag_only",
+    "tool_routing": {
+      "actual_route": [
+        "rag_search"
+      ],
+      "failure_labels": [],
+      "forbidden_tools_used": [],
+      "missing_tools": [],
+      "score": 1.0
+    },
+    "trace_errors": {
+      "errors": [],
+      "failure_labels": [],
+      "score": 1.0
+    },
+    "unsupported_claims": []
+  },
+  {
+    "claim_evaluation": {
+      "claims": [
+        {
+          "assertion_mode": "asserted",
+          "claim_id": "claim_pca_hybrid_cloud_01_2e94511c",
+          "claim_type": "source_attribution",
+          "extraction_warnings": [],
+          "extractor": {
+            "kind": "deterministic",
+            "model": "rules-v1",
+            "prompt_version": "claim_extraction_v1",
+            "provider": "local"
+          },
+          "ordinal": 1,
+          "run_id": "pca_pca_hybrid_cloud",
+          "schema_version": "1.0",
+          "source_requirement": "sql",
+          "source_span": {
+            "end": 86,
+            "start": 0
+          },
+          "source_text": "Structured data shows faster recent revenue growth for Microsoft in this evidence set.",
+          "subject": "Structured",
+          "task_id": "pca_hybrid_cloud",
+          "text": "Structured data shows faster recent revenue growth for Microsoft in this evidence set."
+        },
+        {
+          "assertion_mode": "asserted",
+          "claim_id": "claim_pca_hybrid_cloud_02_b62fbf27",
+          "claim_type": "entity_fact",
+          "extraction_warnings": [],
+          "extractor": {
+            "kind": "deterministic",
+            "model": "rules-v1",
+            "prompt_version": "claim_extraction_v1",
+            "provider": "local"
+          },
+          "ordinal": 2,
+          "run_id": "pca_pca_hybrid_cloud",
+          "schema_version": "1.0",
+          "source_requirement": "hybrid",
+          "source_span": {
+            "end": 142,
+            "start": 87
+          },
+          "source_text": "Filing excerpts connect Microsoft cloud demand to Azure and AI adoption, while Amazon emphasizes AWS growth and infrastructure investment.",
+          "subject": "Filing",
+          "task_id": "pca_hybrid_cloud",
+          "text": "Filing excerpts connect Microsoft cloud demand to Azure"
+        },
+        {
+          "assertion_mode": "asserted",
+          "claim_id": "claim_pca_hybrid_cloud_03_ddcbfb9e",
+          "claim_type": "entity_fact",
+          "extraction_warnings": [],
+          "extractor": {
+            "kind": "deterministic",
+            "model": "rules-v1",
+            "prompt_version": "claim_extraction_v1",
+            "provider": "local"
+          },
+          "ordinal": 3,
+          "run_id": "pca_pca_hybrid_cloud",
+          "schema_version": "1.0",
+          "source_requirement": "hybrid",
+          "source_span": {
+            "end": 194,
+            "start": 147
+          },
+          "source_text": "Filing excerpts connect Microsoft cloud demand to Azure and AI adoption, while Amazon emphasizes AWS growth and infrastructure investment.",
+          "subject": "AI",
+          "task_id": "pca_hybrid_cloud",
+          "text": "AI adoption, while Amazon emphasizes AWS growth"
+        }
+      ],
+      "evidence": [
+        {
+          "content": "period_end=2026-03-31, revenue_growth_yoy=0.13, ticker=MSFT",
+          "evidence_id": "evidence_f3af45521a5c",
+          "provenance": {
+            "event_step": 1,
+            "item_index": 0,
+            "tool_input": {
+              "query": "SELECT ticker, period_end, revenue_growth_yoy FROM company_metrics WHERE ticker IN ('MSFT', 'AMZN')"
+            },
+            "trace_run_id": "pca_pca_hybrid_cloud"
+          },
+          "run_id": "pca_pca_hybrid_cloud",
+          "schema_version": "1.0",
+          "source_type": "sql_row",
+          "structured_payload": {
+            "period_end": "2026-03-31",
+            "revenue_growth_yoy": 0.13,
+            "ticker": "MSFT"
+          },
+          "task_id": "pca_hybrid_cloud",
+          "tool": "sql_query",
+          "tool_step": 1
+        },
+        {
+          "content": "period_end=2026-03-31, revenue_growth_yoy=0.09, ticker=AMZN",
+          "evidence_id": "evidence_4a25a3767872",
+          "provenance": {
+            "event_step": 1,
+            "item_index": 1,
+            "tool_input": {
+              "query": "SELECT ticker, period_end, revenue_growth_yoy FROM company_metrics WHERE ticker IN ('MSFT', 'AMZN')"
+            },
+            "trace_run_id": "pca_pca_hybrid_cloud"
+          },
+          "run_id": "pca_pca_hybrid_cloud",
+          "schema_version": "1.0",
+          "source_type": "sql_row",
+          "structured_payload": {
+            "period_end": "2026-03-31",
+            "revenue_growth_yoy": 0.09,
+            "ticker": "AMZN"
+          },
+          "task_id": "pca_hybrid_cloud",
+          "tool": "sql_query",
+          "tool_step": 1
+        },
+        {
+          "content": "Microsoft linked cloud demand to Azure and AI infrastructure adoption.",
+          "evidence_id": "evidence_9f3a9c5805db",
+          "provenance": {
+            "event_step": 2,
+            "item_index": 0,
+            "tool_input": null,
+            "trace_run_id": "pca_pca_hybrid_cloud"
+          },
+          "run_id": "pca_pca_hybrid_cloud",
+          "schema_version": "1.0",
+          "source_type": "document_chunk",
+          "structured_payload": {
+            "doc_id": "MSFT_10-Q_cloud_1",
+            "doc_type": "10-Q",
+            "metadata": {
+              "doc_date": "2026-04-24",
+              "doc_type": "10-Q",
+              "ticker": "MSFT"
+            },
+            "score": 0.89,
+            "text": "Microsoft linked cloud demand to Azure and AI infrastructure adoption.",
+            "title": "MSFT_10-Q_cloud_1"
+          },
+          "task_id": "pca_hybrid_cloud",
+          "tool": "rag_search",
+          "tool_step": 2
+        },
+        {
+          "content": "Amazon described AWS growth alongside continued infrastructure investment.",
+          "evidence_id": "evidence_89b17d2589dd",
+          "provenance": {
+            "event_step": 2,
+            "item_index": 1,
+            "tool_input": null,
+            "trace_run_id": "pca_pca_hybrid_cloud"
+          },
+          "run_id": "pca_pca_hybrid_cloud",
+          "schema_version": "1.0",
+          "source_type": "document_chunk",
+          "structured_payload": {
+            "doc_id": "AMZN_10-Q_cloud_1",
+            "doc_type": "10-Q",
+            "metadata": {
+              "doc_date": "2026-05-01",
+              "doc_type": "10-Q",
+              "ticker": "AMZN"
+            },
+            "score": 0.87,
+            "text": "Amazon described AWS growth alongside continued infrastructure investment.",
+            "title": "AMZN_10-Q_cloud_1"
+          },
+          "task_id": "pca_hybrid_cloud",
+          "tool": "rag_search",
+          "tool_step": 2
+        }
+      ],
+      "judge_calls": [],
+      "metrics": {
+        "claim_count": 3,
+        "hard_gate_failures": [],
+        "high_severity_issue_count": 0,
+        "issue_count": 2,
+        "needs_review_count": 1,
+        "score": 0.375,
+        "status": "needs_review",
+        "verdict_counts": {
+          "not_enough_evidence": 1,
+          "partially_supported": 1,
+          "supported": 1
+        }
+      },
+      "verdicts": [
+        {
+          "claim_id": "claim_pca_hybrid_cloud_01_2e94511c",
+          "confidence": 0.55,
+          "evidence_considered": [
+            "evidence_f3af45521a5c",
+            "evidence_4a25a3767872",
+            "evidence_9f3a9c5805db",
+            "evidence_89b17d2589dd"
+          ],
+          "evidence_refs": [
+            "evidence_f3af45521a5c",
+            "evidence_4a25a3767872",
+            "evidence_9f3a9c5805db",
+            "evidence_89b17d2589dd"
+          ],
+          "judge_path": "unresolved",
+          "reason": "The trace contains related evidence, but semantic interpretation is required.",
+          "requires_review": true,
+          "risk_level": "medium",
+          "run_id": "pca_pca_hybrid_cloud",
+          "schema_version": "1.0",
+          "selection": {
+            "candidate_count": 4,
+            "candidate_limit": 8,
+            "excluded_count": 0
+          },
+          "severity": "medium",
+          "severity_reason": "The asserted claim is not established by the available trace evidence.",
+          "task_id": "pca_hybrid_cloud",
+          "unsupported_parts": [
+            "data",
+            "evidence",
+            "faster",
+            "recent",
+            "set",
+            "structur"
+          ],
+          "verdict": "not_enough_evidence"
+        },
+        {
+          "claim_id": "claim_pca_hybrid_cloud_02_b62fbf27",
+          "confidence": 0.76,
+          "evidence_considered": [
+            "evidence_9f3a9c5805db",
+            "evidence_f3af45521a5c",
+            "evidence_4a25a3767872",
+            "evidence_89b17d2589dd"
+          ],
+          "evidence_refs": [
+            "evidence_9f3a9c5805db",
+            "evidence_f3af45521a5c",
+            "evidence_4a25a3767872",
+            "evidence_89b17d2589dd"
+          ],
+          "judge_path": "deterministic",
+          "reason": "The evidence supports the core topic but not every material qualifier.",
+          "requires_review": false,
+          "risk_level": "low",
+          "run_id": "pca_pca_hybrid_cloud",
+          "schema_version": "1.0",
+          "selection": {
+            "candidate_count": 4,
+            "candidate_limit": 8,
+            "excluded_count": 0
+          },
+          "severity": "low",
+          "severity_reason": "A material part of the claim is not supported.",
+          "task_id": "pca_hybrid_cloud",
+          "unsupported_parts": [
+            "connect",
+            "excerpt",
+            "filing"
+          ],
+          "verdict": "partially_supported"
+        },
+        {
+          "claim_id": "claim_pca_hybrid_cloud_03_ddcbfb9e",
+          "confidence": 0.958,
+          "evidence_considered": [
+            "evidence_9f3a9c5805db",
+            "evidence_89b17d2589dd",
+            "evidence_f3af45521a5c",
+            "evidence_4a25a3767872"
+          ],
+          "evidence_refs": [
+            "evidence_9f3a9c5805db",
+            "evidence_89b17d2589dd",
+            "evidence_f3af45521a5c",
+            "evidence_4a25a3767872"
+          ],
+          "judge_path": "deterministic",
+          "reason": "The material entities and details are present in the selected trace evidence.",
+          "requires_review": false,
+          "risk_level": "low",
+          "run_id": "pca_pca_hybrid_cloud",
+          "schema_version": "1.0",
+          "selection": {
+            "candidate_count": 4,
+            "candidate_limit": 8,
+            "excluded_count": 0
+          },
+          "severity": "none",
+          "severity_reason": "The claim is supported; potential risk remains available for weighting.",
+          "task_id": "pca_hybrid_cloud",
+          "unsupported_parts": [],
+          "verdict": "supported"
+        }
+      ]
+    },
+    "dimension_scores": {
+      "completeness": 1.0,
+      "efficiency": 1.0,
+      "expected_facts": 1.0,
+      "faithfulness": 0.375,
+      "retrieval_grounding": 1.0,
+      "source_attribution": 0.5,
+      "sql_correctness": 1.0,
+      "synthesis": 0.55,
+      "tool_routing": 1.0,
+      "trace_health": 1.0
+    },
+    "efficiency": {
+      "failure_labels": [],
+      "max_tool_calls": 2,
+      "score": 1.0,
+      "tool_calls": 2
+    },
+    "expected_facts": {
+      "matched_terms": [],
+      "missing_terms": [],
+      "score": 1.0
+    },
+    "failure_labels": [
+      "unsupported_claim",
+      "claim_needs_review"
+    ],
+    "judges": {
+      "claim_evaluation": {
+        "claims": [
+          {
+            "assertion_mode": "asserted",
+            "claim_id": "claim_pca_hybrid_cloud_01_2e94511c",
+            "claim_type": "source_attribution",
+            "extraction_warnings": [],
+            "extractor": {
+              "kind": "deterministic",
+              "model": "rules-v1",
+              "prompt_version": "claim_extraction_v1",
+              "provider": "local"
+            },
+            "ordinal": 1,
+            "run_id": "pca_pca_hybrid_cloud",
+            "schema_version": "1.0",
+            "source_requirement": "sql",
+            "source_span": {
+              "end": 86,
+              "start": 0
+            },
+            "source_text": "Structured data shows faster recent revenue growth for Microsoft in this evidence set.",
+            "subject": "Structured",
+            "task_id": "pca_hybrid_cloud",
+            "text": "Structured data shows faster recent revenue growth for Microsoft in this evidence set."
+          },
+          {
+            "assertion_mode": "asserted",
+            "claim_id": "claim_pca_hybrid_cloud_02_b62fbf27",
+            "claim_type": "entity_fact",
+            "extraction_warnings": [],
+            "extractor": {
+              "kind": "deterministic",
+              "model": "rules-v1",
+              "prompt_version": "claim_extraction_v1",
+              "provider": "local"
+            },
+            "ordinal": 2,
+            "run_id": "pca_pca_hybrid_cloud",
+            "schema_version": "1.0",
+            "source_requirement": "hybrid",
+            "source_span": {
+              "end": 142,
+              "start": 87
+            },
+            "source_text": "Filing excerpts connect Microsoft cloud demand to Azure and AI adoption, while Amazon emphasizes AWS growth and infrastructure investment.",
+            "subject": "Filing",
+            "task_id": "pca_hybrid_cloud",
+            "text": "Filing excerpts connect Microsoft cloud demand to Azure"
+          },
+          {
+            "assertion_mode": "asserted",
+            "claim_id": "claim_pca_hybrid_cloud_03_ddcbfb9e",
+            "claim_type": "entity_fact",
+            "extraction_warnings": [],
+            "extractor": {
+              "kind": "deterministic",
+              "model": "rules-v1",
+              "prompt_version": "claim_extraction_v1",
+              "provider": "local"
+            },
+            "ordinal": 3,
+            "run_id": "pca_pca_hybrid_cloud",
+            "schema_version": "1.0",
+            "source_requirement": "hybrid",
+            "source_span": {
+              "end": 194,
+              "start": 147
+            },
+            "source_text": "Filing excerpts connect Microsoft cloud demand to Azure and AI adoption, while Amazon emphasizes AWS growth and infrastructure investment.",
+            "subject": "AI",
+            "task_id": "pca_hybrid_cloud",
+            "text": "AI adoption, while Amazon emphasizes AWS growth"
+          }
+        ],
+        "evidence": [
+          {
+            "content": "period_end=2026-03-31, revenue_growth_yoy=0.13, ticker=MSFT",
+            "evidence_id": "evidence_f3af45521a5c",
+            "provenance": {
+              "event_step": 1,
+              "item_index": 0,
+              "tool_input": {
+                "query": "SELECT ticker, period_end, revenue_growth_yoy FROM company_metrics WHERE ticker IN ('MSFT', 'AMZN')"
+              },
+              "trace_run_id": "pca_pca_hybrid_cloud"
+            },
+            "run_id": "pca_pca_hybrid_cloud",
+            "schema_version": "1.0",
+            "source_type": "sql_row",
+            "structured_payload": {
+              "period_end": "2026-03-31",
+              "revenue_growth_yoy": 0.13,
+              "ticker": "MSFT"
+            },
+            "task_id": "pca_hybrid_cloud",
+            "tool": "sql_query",
+            "tool_step": 1
+          },
+          {
+            "content": "period_end=2026-03-31, revenue_growth_yoy=0.09, ticker=AMZN",
+            "evidence_id": "evidence_4a25a3767872",
+            "provenance": {
+              "event_step": 1,
+              "item_index": 1,
+              "tool_input": {
+                "query": "SELECT ticker, period_end, revenue_growth_yoy FROM company_metrics WHERE ticker IN ('MSFT', 'AMZN')"
+              },
+              "trace_run_id": "pca_pca_hybrid_cloud"
+            },
+            "run_id": "pca_pca_hybrid_cloud",
+            "schema_version": "1.0",
+            "source_type": "sql_row",
+            "structured_payload": {
+              "period_end": "2026-03-31",
+              "revenue_growth_yoy": 0.09,
+              "ticker": "AMZN"
+            },
+            "task_id": "pca_hybrid_cloud",
+            "tool": "sql_query",
+            "tool_step": 1
+          },
+          {
+            "content": "Microsoft linked cloud demand to Azure and AI infrastructure adoption.",
+            "evidence_id": "evidence_9f3a9c5805db",
+            "provenance": {
+              "event_step": 2,
+              "item_index": 0,
+              "tool_input": null,
+              "trace_run_id": "pca_pca_hybrid_cloud"
+            },
+            "run_id": "pca_pca_hybrid_cloud",
+            "schema_version": "1.0",
+            "source_type": "document_chunk",
+            "structured_payload": {
+              "doc_id": "MSFT_10-Q_cloud_1",
+              "doc_type": "10-Q",
+              "metadata": {
+                "doc_date": "2026-04-24",
+                "doc_type": "10-Q",
+                "ticker": "MSFT"
+              },
+              "score": 0.89,
+              "text": "Microsoft linked cloud demand to Azure and AI infrastructure adoption.",
+              "title": "MSFT_10-Q_cloud_1"
+            },
+            "task_id": "pca_hybrid_cloud",
+            "tool": "rag_search",
+            "tool_step": 2
+          },
+          {
+            "content": "Amazon described AWS growth alongside continued infrastructure investment.",
+            "evidence_id": "evidence_89b17d2589dd",
+            "provenance": {
+              "event_step": 2,
+              "item_index": 1,
+              "tool_input": null,
+              "trace_run_id": "pca_pca_hybrid_cloud"
+            },
+            "run_id": "pca_pca_hybrid_cloud",
+            "schema_version": "1.0",
+            "source_type": "document_chunk",
+            "structured_payload": {
+              "doc_id": "AMZN_10-Q_cloud_1",
+              "doc_type": "10-Q",
+              "metadata": {
+                "doc_date": "2026-05-01",
+                "doc_type": "10-Q",
+                "ticker": "AMZN"
+              },
+              "score": 0.87,
+              "text": "Amazon described AWS growth alongside continued infrastructure investment.",
+              "title": "AMZN_10-Q_cloud_1"
+            },
+            "task_id": "pca_hybrid_cloud",
+            "tool": "rag_search",
+            "tool_step": 2
+          }
+        ],
+        "judge_calls": [],
+        "metrics": {
+          "claim_count": 3,
+          "hard_gate_failures": [],
+          "high_severity_issue_count": 0,
+          "issue_count": 2,
+          "needs_review_count": 1,
+          "score": 0.375,
+          "status": "needs_review",
+          "verdict_counts": {
+            "not_enough_evidence": 1,
+            "partially_supported": 1,
+            "supported": 1
+          }
+        },
+        "verdicts": [
+          {
+            "claim_id": "claim_pca_hybrid_cloud_01_2e94511c",
+            "confidence": 0.55,
+            "evidence_considered": [
+              "evidence_f3af45521a5c",
+              "evidence_4a25a3767872",
+              "evidence_9f3a9c5805db",
+              "evidence_89b17d2589dd"
+            ],
+            "evidence_refs": [
+              "evidence_f3af45521a5c",
+              "evidence_4a25a3767872",
+              "evidence_9f3a9c5805db",
+              "evidence_89b17d2589dd"
+            ],
+            "judge_path": "unresolved",
+            "reason": "The trace contains related evidence, but semantic interpretation is required.",
+            "requires_review": true,
+            "risk_level": "medium",
+            "run_id": "pca_pca_hybrid_cloud",
+            "schema_version": "1.0",
+            "selection": {
+              "candidate_count": 4,
+              "candidate_limit": 8,
+              "excluded_count": 0
+            },
+            "severity": "medium",
+            "severity_reason": "The asserted claim is not established by the available trace evidence.",
+            "task_id": "pca_hybrid_cloud",
+            "unsupported_parts": [
+              "data",
+              "evidence",
+              "faster",
+              "recent",
+              "set",
+              "structur"
+            ],
+            "verdict": "not_enough_evidence"
+          },
+          {
+            "claim_id": "claim_pca_hybrid_cloud_02_b62fbf27",
+            "confidence": 0.76,
+            "evidence_considered": [
+              "evidence_9f3a9c5805db",
+              "evidence_f3af45521a5c",
+              "evidence_4a25a3767872",
+              "evidence_89b17d2589dd"
+            ],
+            "evidence_refs": [
+              "evidence_9f3a9c5805db",
+              "evidence_f3af45521a5c",
+              "evidence_4a25a3767872",
+              "evidence_89b17d2589dd"
+            ],
+            "judge_path": "deterministic",
+            "reason": "The evidence supports the core topic but not every material qualifier.",
+            "requires_review": false,
+            "risk_level": "low",
+            "run_id": "pca_pca_hybrid_cloud",
+            "schema_version": "1.0",
+            "selection": {
+              "candidate_count": 4,
+              "candidate_limit": 8,
+              "excluded_count": 0
+            },
+            "severity": "low",
+            "severity_reason": "A material part of the claim is not supported.",
+            "task_id": "pca_hybrid_cloud",
+            "unsupported_parts": [
+              "connect",
+              "excerpt",
+              "filing"
+            ],
+            "verdict": "partially_supported"
+          },
+          {
+            "claim_id": "claim_pca_hybrid_cloud_03_ddcbfb9e",
+            "confidence": 0.958,
+            "evidence_considered": [
+              "evidence_9f3a9c5805db",
+              "evidence_89b17d2589dd",
+              "evidence_f3af45521a5c",
+              "evidence_4a25a3767872"
+            ],
+            "evidence_refs": [
+              "evidence_9f3a9c5805db",
+              "evidence_89b17d2589dd",
+              "evidence_f3af45521a5c",
+              "evidence_4a25a3767872"
+            ],
+            "judge_path": "deterministic",
+            "reason": "The material entities and details are present in the selected trace evidence.",
+            "requires_review": false,
+            "risk_level": "low",
+            "run_id": "pca_pca_hybrid_cloud",
+            "schema_version": "1.0",
+            "selection": {
+              "candidate_count": 4,
+              "candidate_limit": 8,
+              "excluded_count": 0
+            },
+            "severity": "none",
+            "severity_reason": "The claim is supported; potential risk remains available for weighting.",
+            "task_id": "pca_hybrid_cloud",
+            "unsupported_parts": [],
+            "verdict": "supported"
+          }
+        ]
+      },
+      "completeness_score": 1.0,
+      "failure_labels": [
+        "unsupported_claim",
+        "claim_needs_review"
+      ],
+      "faithfulness_score": 0.375,
+      "faithfulness_status": "needs_review",
+      "source_attribution_score": 0.5,
+      "synthesis_score": 0.55,
+      "unsupported_claims": [
+        {
+          "claim": "Structured data shows faster recent revenue growth for Microsoft in this evidence set.",
+          "claim_id": "claim_pca_hybrid_cloud_01_2e94511c",
+          "evidence_refs": [
+            "evidence_f3af45521a5c",
+            "evidence_4a25a3767872",
+            "evidence_9f3a9c5805db",
+            "evidence_89b17d2589dd"
+          ],
+          "reason": "The trace contains related evidence, but semantic interpretation is required.",
+          "severity": "medium",
+          "verdict": "not_enough_evidence"
+        },
+        {
+          "claim": "Filing excerpts connect Microsoft cloud demand to Azure",
+          "claim_id": "claim_pca_hybrid_cloud_02_b62fbf27",
+          "evidence_refs": [
+            "evidence_9f3a9c5805db",
+            "evidence_f3af45521a5c",
+            "evidence_4a25a3767872",
+            "evidence_89b17d2589dd"
+          ],
+          "reason": "The evidence supports the core topic but not every material qualifier.",
+          "severity": "low",
+          "verdict": "partially_supported"
+        }
+      ]
+    },
+    "overall_score": 0.91,
+    "retrieval": {
+      "applicable": true,
+      "expected_docs_found": [
+        "AMZN_10-Q_cloud_1",
+        "MSFT_10-Q_cloud_1"
+      ],
+      "failure_labels": [],
+      "irrelevant_docs": [],
+      "missing_docs": [],
+      "score": 1.0
+    },
+    "sql_correctness": {
+      "applicable": true,
+      "failure_labels": [],
+      "found_entities": [
+        "AMZN",
+        "MSFT"
+      ],
+      "missing_expected_rows": [],
+      "missing_required_tables": [],
+      "required_tables_used": [
+        "company_metrics"
+      ],
+      "score": 1.0,
+      "unexpected_rows": []
+    },
+    "status": "needs_review",
+    "task_id": "pca_hybrid_cloud",
+    "task_type": "hybrid_sql_rag",
+    "tool_routing": {
+      "actual_route": [
+        "sql_query",
+        "rag_search"
+      ],
+      "failure_labels": [],
+      "forbidden_tools_used": [],
+      "missing_tools": [],
+      "score": 1.0
+    },
+    "trace_errors": {
+      "errors": [],
+      "failure_labels": [],
+      "score": 1.0
+    },
+    "unsupported_claims": [
+      {
+        "claim": "Structured data shows faster recent revenue growth for Microsoft in this evidence set.",
+        "claim_id": "claim_pca_hybrid_cloud_01_2e94511c",
+        "evidence_refs": [
+          "evidence_f3af45521a5c",
+          "evidence_4a25a3767872",
+          "evidence_9f3a9c5805db",
+          "evidence_89b17d2589dd"
+        ],
+        "reason": "The trace contains related evidence, but semantic interpretation is required.",
+        "severity": "medium",
+        "verdict": "not_enough_evidence"
+      },
+      {
+        "claim": "Filing excerpts connect Microsoft cloud demand to Azure",
+        "claim_id": "claim_pca_hybrid_cloud_02_b62fbf27",
+        "evidence_refs": [
+          "evidence_9f3a9c5805db",
+          "evidence_f3af45521a5c",
+          "evidence_4a25a3767872",
+          "evidence_89b17d2589dd"
+        ],
+        "reason": "The evidence supports the core topic but not every material qualifier.",
+        "severity": "low",
+        "verdict": "partially_supported"
+      }
+    ]
+  }
+]

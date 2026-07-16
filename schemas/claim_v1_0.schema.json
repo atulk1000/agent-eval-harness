@@ -1,0 +1,46 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://agenteval.local/schemas/claim_v1_0.schema.json",
+  "title": "AgentEval Atomic Claim 1.0",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "claim_id",
+    "run_id",
+    "task_id",
+    "ordinal",
+    "text",
+    "source_text",
+    "source_span",
+    "claim_type",
+    "assertion_mode",
+    "source_requirement",
+    "extractor"
+  ],
+  "properties": {
+    "schema_version": {"const": "1.0"},
+    "claim_id": {"type": "string", "minLength": 1},
+    "run_id": {"type": "string", "minLength": 1},
+    "task_id": {"type": "string", "minLength": 1},
+    "ordinal": {"type": "integer", "minimum": 1},
+    "text": {"type": "string", "minLength": 1},
+    "source_text": {"type": "string"},
+    "source_span": {
+      "type": "object",
+      "required": ["start", "end"],
+      "properties": {
+        "start": {"type": "integer", "minimum": 0},
+        "end": {"type": "integer", "minimum": 0}
+      },
+      "additionalProperties": false
+    },
+    "claim_type": {
+      "enum": ["numeric", "entity_fact", "business_status", "policy_or_requirement", "causal", "comparative", "source_attribution", "descriptive", "other"]
+    },
+    "assertion_mode": {"enum": ["asserted", "caveated", "uncertain"]},
+    "subject": {"type": ["string", "null"]},
+    "source_requirement": {"enum": ["sql", "rag", "hybrid", "any"]},
+    "extractor": {"type": "object"}
+  },
+  "additionalProperties": true
+}

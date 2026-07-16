@@ -9,7 +9,9 @@ from agenteval.reports.markdown import render_comparison
 from agenteval.trace import read_json, write_json
 
 
-def compare_run_dirs(left_dir: str | Path, right_dir: str | Path, out_dir: str | Path | None = None) -> dict[str, Any]:
+def compare_run_dirs(
+    left_dir: str | Path, right_dir: str | Path, out_dir: str | Path | None = None
+) -> dict[str, Any]:
     left_path = Path(left_dir)
     right_path = Path(right_dir)
     left = read_json(left_path / "summary.json")
@@ -19,7 +21,8 @@ def compare_run_dirs(left_dir: str | Path, right_dir: str | Path, out_dir: str |
         "left": left,
         "right": right,
         "overall_score_delta": round(right["overall_score"] - left["overall_score"], 3),
-        "unsupported_claim_delta": right["unsupported_claim_count"] - left["unsupported_claim_count"],
+        "unsupported_claim_delta": right["unsupported_claim_count"]
+        - left["unsupported_claim_count"],
         "dimension_deltas": {
             dimension: round(
                 right.get("dimension_averages", {}).get(dimension, 0.0)

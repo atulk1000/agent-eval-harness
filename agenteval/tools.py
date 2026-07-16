@@ -11,7 +11,6 @@ from typing import Any
 from agenteval.data_loader import DEFAULT_DB_PATH, DEFAULT_DOCS_PATH, load_documents
 from agenteval.trace import TraceRecorder, timed_call
 
-
 TABLE_PATTERN = re.compile(r"\b(?:from|join)\s+([a-zA-Z_][a-zA-Z0-9_]*)", re.IGNORECASE)
 
 

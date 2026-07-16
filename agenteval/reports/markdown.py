@@ -16,7 +16,9 @@ def render_report(summary: dict[str, Any], scores: list[dict[str, Any]]) -> str:
         f"- Tasks: {summary.get('task_count')}",
         f"- Passed: {summary.get('passed')}",
         f"- Failed: {summary.get('failed')}",
+        f"- Needs review: {summary.get('needs_review', 0)}",
         f"- Overall score: {summary.get('overall_score')}",
+        f"- Extracted claims: {summary.get('claim_count', 0)}",
         f"- Unsupported claims: {summary.get('unsupported_claim_count')}",
         f"- High-severity unsupported claims: {summary.get('high_severity_claim_count')}",
         "",
@@ -39,6 +41,7 @@ def render_report(summary: dict[str, Any], scores: list[dict[str, Any]]) -> str:
                 f"- Actual route: {' -> '.join(score['tool_routing']['actual_route']) or 'none'}",
                 f"- Failure labels: {labels}",
                 f"- Unsupported claims: {len(score.get('unsupported_claims', []))}",
+                f"- Claim verdicts: {score.get('claim_evaluation', {}).get('metrics', {}).get('verdict_counts', {})}",
                 "",
             ]
         )

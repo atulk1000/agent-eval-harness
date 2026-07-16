@@ -4,6 +4,7 @@ from __future__ import annotations
 
 from typing import Any
 
+from agenteval.claim_eval.pipeline import ClaimEvaluationConfig
 from agenteval.scorers.efficiency import score_efficiency, score_trace_errors
 from agenteval.scorers.facts import score_expected_facts
 from agenteval.scorers.judges import score_judges
@@ -12,14 +13,18 @@ from agenteval.scorers.sql_correctness import score_sql_correctness
 from agenteval.scorers.tool_routing import score_tool_routing
 
 
-def score_run(task: dict[str, Any], run: dict[str, Any]) -> dict[str, Any]:
+def score_run(
+    task: dict[str, Any],
+    run: dict[str, Any],
+    claim_config: ClaimEvaluationConfig | None = None,
+) -> dict[str, Any]:
     tool = score_tool_routing(task, run)
     sql = score_sql_correctness(task, run)
     retrieval = score_retrieval(task, run)
     facts = score_expected_facts(task, run)
     efficiency = score_efficiency(task, run)
     trace_errors = score_trace_errors(run)
-    judges = score_judges(task, run, facts["score"])
+    judges = score_judges(task, run, facts["score"], claim_config)
 
     dimension_scores = {
         "tool_routing": tool["score"],
@@ -44,7 +49,19 @@ def score_run(task: dict[str, Any], run: dict[str, Any]) -> dict[str, Any]:
             continue
         weighted_total += score * float(weight)
         weight_total += float(weight)
-    overall = weighted_total / weight_total if weight_total else sum(dimension_scores.values()) / len(dimension_scores)
+    applicable_scores = [value for value in dimension_scores.values() if value is not None]
+    overall = (
+        weighted_total / weight_total
+        if weight_total
+        else sum(applicable_scores) / max(len(applicable_scores), 1)
+    )
+    faithfulness_status = judges["faithfulness_status"]
+    if faithfulness_status == "fail":
+        status = "fail"
+    elif faithfulness_status == "needs_review":
+        status = "needs_review"
+    else:
+        status = "pass" if overall >= 0.8 else "fail"
 
     failure_labels = _dedupe(
         tool.get("failure_labels", [])
@@ -59,7 +76,7 @@ def score_run(task: dict[str, Any], run: dict[str, Any]) -> dict[str, Any]:
         "task_id": task["id"],
         "task_type": task["task_type"],
         "overall_score": round(overall, 3),
-        "status": "pass" if overall >= 0.8 else "fail",
+        "status": status,
         "dimension_scores": dimension_scores,
         "tool_routing": tool,
         "sql_correctness": sql,
@@ -68,6 +85,7 @@ def score_run(task: dict[str, Any], run: dict[str, Any]) -> dict[str, Any]:
         "efficiency": efficiency,
         "trace_errors": trace_errors,
         "judges": judges,
+        "claim_evaluation": judges["claim_evaluation"],
         "unsupported_claims": judges["unsupported_claims"],
         "failure_labels": failure_labels,
     }

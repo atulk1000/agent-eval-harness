@@ -55,12 +55,18 @@ def score_sql_correctness(task: dict[str, Any], run: dict[str, Any]) -> dict[str
     if missing_tables:
         labels.append("sql_missing_required_table")
 
-    recall = 1.0 if not expected_entities else len(expected_entities & found_entities) / len(expected_entities)
+    recall = (
+        1.0
+        if not expected_entities
+        else len(expected_entities & found_entities) / len(expected_entities)
+    )
     precision = 1.0
     relevant_found = found_entities & (expected_entities | unexpected_entities)
     if relevant_found:
         precision = len(expected_entities & found_entities) / len(relevant_found)
-    table_score = 1.0 if not required_tables else len(required_tables & used_tables) / len(required_tables)
+    table_score = (
+        1.0 if not required_tables else len(required_tables & used_tables) / len(required_tables)
+    )
     execution_score = 1.0
     score = execution_score * 0.25 + table_score * 0.20 + recall * 0.40 + precision * 0.15
     return {

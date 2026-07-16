@@ -43,7 +43,7 @@ def row_entities(run: dict[str, Any]) -> set[str]:
     entities: set[str] = set()
     for event in successful_events(run, "sql_query"):
         for row in event.get("output", {}).get("rows", []):
-            for key in ("customer_name", "customer", "name"):
+            for key in ("customer_name", "company_name", "customer", "ticker", "name"):
                 value = row.get(key)
                 if isinstance(value, str):
                     entities.add(value)

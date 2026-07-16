@@ -1,0 +1,40 @@
+{
+  "case_count": 100,
+  "dataset_id": "claim_faithfulness_v1",
+  "limitations": [
+    "Machine proposals are not gold labels.",
+    "The bundled PCA proof contains three source runs; twenty PCA cases use deterministic evidence-window variants from those runs.",
+    "Primary and independent human review remain required before release gates can be claimed."
+  ],
+  "mutation_counts": {
+    "altered_number": 5,
+    "causal_overreach": 5,
+    "correct_paraphrase": 5,
+    "entity_swap": 5,
+    "negation": 5,
+    "partial_scope": 5,
+    "policy_approval": 5,
+    "unsupported_status": 5
+  },
+  "schema_version": "1.0",
+  "source_counts": {
+    "adversarial": 40,
+    "customer_risk": 30,
+    "public_company": 20,
+    "tool_failure": 10
+  },
+  "source_pool_trace_counts": {
+    "customer_risk": 30,
+    "public_company": 3
+  },
+  "source_trace_counts": {
+    "customer_risk": 13,
+    "public_company": 3
+  },
+  "split_counts": {
+    "calibration": 20,
+    "development": 60,
+    "held_out": 20
+  },
+  "status": "proposed_labels_pending_human_review"
+}

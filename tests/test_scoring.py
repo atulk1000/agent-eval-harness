@@ -14,7 +14,11 @@ class ScoringTests(unittest.TestCase):
                 "forbidden_tools": [],
                 "max_tool_calls": 4,
             },
-            "expected_sql": {"required_tables": [], "expected_entities": [], "unexpected_entities": []},
+            "expected_sql": {
+                "required_tables": [],
+                "expected_entities": [],
+                "unexpected_entities": [],
+            },
             "expected_documents": {"relevant_doc_ids": []},
             "expected_answer_terms": [],
             "unsupported_claim_traps": [],
@@ -23,7 +27,9 @@ class ScoringTests(unittest.TestCase):
         run = {
             "task_id": "t1",
             "final_answer": "premature answer",
-            "trace": [{"type": "tool_call", "tool": "schema_lookup", "success": True, "output": {}}],
+            "trace": [
+                {"type": "tool_call", "tool": "schema_lookup", "success": True, "output": {}}
+            ],
         }
         score = score_run(task, run)
         self.assertIn("missing_required_tool", score["failure_labels"])
@@ -33,7 +39,11 @@ class ScoringTests(unittest.TestCase):
             "id": "t2",
             "task_type": "sql_only",
             "expected_route": {"required_tools": [], "optional_tools": [], "forbidden_tools": []},
-            "expected_sql": {"required_tables": [], "expected_entities": [], "unexpected_entities": []},
+            "expected_sql": {
+                "required_tables": [],
+                "expected_entities": [],
+                "unexpected_entities": [],
+            },
             "expected_documents": {"relevant_doc_ids": []},
             "expected_answer_terms": [],
             "unsupported_claim_traps": [

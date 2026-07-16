@@ -10,6 +10,8 @@ from datetime import UTC, datetime
 from pathlib import Path
 from typing import Any
 
+from agenteval.schema import CURRENT_SCHEMA_VERSION
+
 
 def utc_now() -> str:
     """Return an ISO timestamp in UTC."""
@@ -24,6 +26,7 @@ class TraceRecorder:
     task_id: str
     agent_name: str
     model: str
+    metadata: dict[str, Any] = field(default_factory=dict)
     run_id: str = field(default_factory=lambda: f"run_{uuid.uuid4().hex[:12]}")
     started_at: str = field(default_factory=utc_now)
     trace: list[dict[str, Any]] = field(default_factory=list)
@@ -63,6 +66,7 @@ class TraceRecorder:
         """Return a JSON-serializable agent run."""
 
         return {
+            "schema_version": CURRENT_SCHEMA_VERSION,
             "run_id": self.run_id,
             "task_id": self.task_id,
             "agent_name": self.agent_name,
@@ -71,6 +75,7 @@ class TraceRecorder:
             "completed_at": self.completed_at or utc_now(),
             "final_answer": self.final_answer,
             "trace": self.trace,
+            "metadata": self.metadata,
         }
 
 

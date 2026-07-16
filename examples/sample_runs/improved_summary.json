@@ -1,23 +1,30 @@
 {
   "agent_name": "improved_agent",
+  "claim_count": 36,
+  "claim_needs_review_count": 0,
+  "claim_verdict_counts": {
+    "partially_supported": 1,
+    "supported": 35
+  },
   "dimension_averages": {
     "completeness": 1.0,
     "efficiency": 1.0,
     "expected_facts": 1.0,
-    "faithfulness": 1.0,
+    "faithfulness": 0.989,
     "retrieval_grounding": 0.903,
     "source_attribution": 1.0,
     "sql_correctness": 1.0,
-    "synthesis": 1.0,
+    "synthesis": 0.99,
     "tool_routing": 1.0,
     "trace_health": 1.0
   },
   "failed": 0,
   "high_severity_claim_count": 0,
-  "overall_score": 0.97,
+  "needs_review": 0,
+  "overall_score": 0.966,
   "passed": 15,
   "run_name": "improved",
   "suite_id": "customer_risk_v1",
   "task_count": 15,
-  "unsupported_claim_count": 0
+  "unsupported_claim_count": 1
 }

@@ -1,0 +1,48 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/atulk1000/agent-eval-harness/schemas/trace_run_v1_0.schema.json",
+  "title": "AgentEval Trace Run 1.0",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "run_id",
+    "task_id",
+    "agent_name",
+    "model",
+    "started_at",
+    "completed_at",
+    "final_answer",
+    "trace"
+  ],
+  "properties": {
+    "schema_version": {"const": "1.0"},
+    "run_id": {"type": "string", "minLength": 1},
+    "task_id": {"type": "string", "minLength": 1},
+    "agent_name": {"type": "string", "minLength": 1},
+    "model": {"type": "string", "minLength": 1},
+    "started_at": {"type": "string", "format": "date-time"},
+    "completed_at": {"type": "string", "format": "date-time"},
+    "final_answer": {"type": "string"},
+    "metadata": {"type": "object"},
+    "trace": {
+      "type": "array",
+      "items": {"$ref": "#/$defs/toolEvent"}
+    }
+  },
+  "$defs": {
+    "toolEvent": {
+      "type": "object",
+      "required": ["step", "type", "tool", "input", "output", "success", "error", "latency_ms"],
+      "properties": {
+        "step": {"type": "integer", "minimum": 1},
+        "type": {"const": "tool_call"},
+        "tool": {"type": "string", "minLength": 1},
+        "input": {"type": "object"},
+        "output": {"type": "object"},
+        "success": {"type": "boolean"},
+        "error": {"type": ["string", "null"]},
+        "latency_ms": {"type": "integer", "minimum": 0}
+      }
+    }
+  }
+}

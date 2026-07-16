@@ -1,5 +1,7 @@
 # AgentEval Harness v1.1 Plan
 
+Historical plan: completed in v1.1. The planned PCA bridge is implemented in v1.2; see [prd_v1_2_independent_proof.md](prd_v1_2_independent_proof.md).
+
 ## Goal
 
 Move AgentEval Harness from a credible MVP to a reviewer-ready portfolio project.

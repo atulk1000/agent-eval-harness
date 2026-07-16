@@ -8,7 +8,6 @@ from contextlib import closing
 from pathlib import Path
 from typing import Any
 
-
 ROOT = Path(__file__).resolve().parents[1]
 DEFAULT_DB_PATH = ROOT / "data" / "sqlite" / "customer_risk.db"
 DEFAULT_DOCS_PATH = ROOT / "data" / "docs" / "documents.json"

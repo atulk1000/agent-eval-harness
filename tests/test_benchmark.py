@@ -3,7 +3,6 @@ from pathlib import Path
 
 from agenteval.benchmark import load_benchmark
 
-
 ROOT = Path(__file__).resolve().parents[1]
 
 

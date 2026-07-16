@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://agenteval.local/schemas/evidence_v1_0.schema.json",
+  "title": "AgentEval Trace Evidence 1.0",
+  "type": "object",
+  "required": ["schema_version", "evidence_id", "run_id", "task_id", "source_type", "tool", "tool_step", "content", "structured_payload", "provenance"],
+  "properties": {
+    "schema_version": {"const": "1.0"},
+    "evidence_id": {"type": "string", "minLength": 1},
+    "run_id": {"type": "string", "minLength": 1},
+    "task_id": {"type": "string", "minLength": 1},
+    "source_type": {"enum": ["sql_row", "document_chunk", "opened_document", "tool_error", "empty_result"]},
+    "tool": {"type": "string", "minLength": 1},
+    "tool_step": {"type": "integer", "minimum": 1},
+    "content": {"type": "string"},
+    "structured_payload": {"type": "object"},
+    "provenance": {
+      "type": "object",
+      "required": ["trace_run_id", "event_step"],
+      "properties": {
+        "trace_run_id": {"type": "string", "minLength": 1},
+        "event_step": {"type": "integer", "minimum": 1}
+      },
+      "additionalProperties": true
+    }
+  },
+  "additionalProperties": true
+}

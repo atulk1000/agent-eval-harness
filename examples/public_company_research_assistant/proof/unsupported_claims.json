@@ -1,0 +1,41 @@
+[
+  {
+    "claim": "Microsoft had the highest operating margin in the supplied structured result.",
+    "claim_id": "claim_pca_sql_margin_01_3f936301",
+    "evidence_refs": [
+      "evidence_4757e2cd5112"
+    ],
+    "reason": "The evidence supports the core topic but not every material qualifier.",
+    "severity": "low",
+    "task_id": "pca_sql_margin",
+    "verdict": "partially_supported"
+  },
+  {
+    "claim": "Structured data shows faster recent revenue growth for Microsoft in this evidence set.",
+    "claim_id": "claim_pca_hybrid_cloud_01_2e94511c",
+    "evidence_refs": [
+      "evidence_f3af45521a5c",
+      "evidence_4a25a3767872",
+      "evidence_9f3a9c5805db",
+      "evidence_89b17d2589dd"
+    ],
+    "reason": "The trace contains related evidence, but semantic interpretation is required.",
+    "severity": "medium",
+    "task_id": "pca_hybrid_cloud",
+    "verdict": "not_enough_evidence"
+  },
+  {
+    "claim": "Filing excerpts connect Microsoft cloud demand to Azure",
+    "claim_id": "claim_pca_hybrid_cloud_02_b62fbf27",
+    "evidence_refs": [
+      "evidence_9f3a9c5805db",
+      "evidence_f3af45521a5c",
+      "evidence_4a25a3767872",
+      "evidence_89b17d2589dd"
+    ],
+    "reason": "The evidence supports the core topic but not every material qualifier.",
+    "severity": "low",
+    "task_id": "pca_hybrid_cloud",
+    "verdict": "partially_supported"
+  }
+]

@@ -99,8 +99,10 @@ def _run_rag_task(task_id: str, prompt: str, tools: Toolset) -> str:
 def _run_hybrid_task(task_id: str, tools: Toolset) -> str:
     tools.schema_lookup()
     if task_id == "hybrid_decline_and_renewal_risk":
-        result = tools.sql_query(_declining_revenue_sql())
-        tools.rag_search("Acme Health Northstar Bank OmniManufacturing June account note renewal risk", top_k=3)
+        tools.sql_query(_declining_revenue_sql())
+        tools.rag_search(
+            "Acme Health Northstar Bank OmniManufacturing June account note renewal risk", top_k=3
+        )
         tools.document_lookup("account_note_acme_2026_06")
         tools.document_lookup("account_note_northstar_2026_06")
         tools.document_lookup("account_note_omni_2026_06")
@@ -122,7 +124,9 @@ def _run_hybrid_task(task_id: str, tools: Toolset) -> str:
             ORDER BY c.customer_name
             """
         )
-        tools.rag_search("Acme Health OmniManufacturing Q2 support SSO data sync integration defects", top_k=3)
+        tools.rag_search(
+            "Acme Health OmniManufacturing Q2 support SSO data sync integration defects", top_k=3
+        )
         tools.document_lookup("support_summary_acme_q2")
         tools.document_lookup("support_summary_omni_q2")
         return (
@@ -142,7 +146,9 @@ def _run_hybrid_task(task_id: str, tools: Toolset) -> str:
             ORDER BY ticket_count DESC
             """
         )
-        tools.rag_search("support escalation policy high-severity remediation plan production workflows", top_k=2)
+        tools.rag_search(
+            "support escalation policy high-severity remediation plan production workflows", top_k=2
+        )
         tools.document_lookup("support_policy_escalation")
         return (
             "SQL shows Acme Health and OmniManufacturing had more than 20 Q2 support "
@@ -160,7 +166,10 @@ def _run_hybrid_task(task_id: str, tools: Toolset) -> str:
             ORDER BY r.renewal_date
             """
         )
-        tools.rag_search("enterprise renewal policy discount above 10 percent VP approval business case risk assessment", top_k=2)
+        tools.rag_search(
+            "enterprise renewal policy discount above 10 percent VP approval business case risk assessment",
+            top_k=2,
+        )
         tools.document_lookup("renewal_policy_enterprise")
         return (
             "SQL identifies Acme Health and OmniManufacturing as at-risk renewals. "

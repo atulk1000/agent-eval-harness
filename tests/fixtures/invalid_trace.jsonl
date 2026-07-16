@@ -1,0 +1,1 @@
+{"schema_version":"2.0","run_id":"","task_id":"invalid","agent_name":"fixture_agent","model":"fixture-model","started_at":"not-a-date","completed_at":"2026-07-12T12:00:01+00:00","final_answer":"bad trace","trace":[{"step":0,"type":"tool_call","tool":"rag_search","input":{},"output":{"documents":"not-a-list"},"success":false,"error":null,"latency_ms":-1}]}

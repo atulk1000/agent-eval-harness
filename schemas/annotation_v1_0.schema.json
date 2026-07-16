@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://agenteval.local/schemas/annotation_v1_0.schema.json",
+  "title": "AgentEval Human Annotation 1.0",
+  "type": "object",
+  "required": ["schema_version", "annotation_id", "claim_id", "reviewer_id", "verdict", "severity", "evidence_refs", "rationale", "dataset_split", "review_stage", "created_at"],
+  "properties": {
+    "schema_version": {"const": "1.0"},
+    "annotation_id": {"type": "string", "minLength": 1},
+    "claim_id": {"type": "string", "minLength": 1},
+    "reviewer_id": {"type": "string", "minLength": 1},
+    "verdict": {"enum": ["supported", "partially_supported", "unsupported", "contradicted", "not_enough_evidence"]},
+    "severity": {"enum": ["none", "low", "medium", "high"]},
+    "evidence_refs": {"type": "array", "items": {"type": "string"}, "uniqueItems": true},
+    "rationale": {"type": "string", "minLength": 1},
+    "dataset_split": {"enum": ["development", "calibration", "held_out", "run"]},
+    "review_stage": {"enum": ["primary", "independent", "adjudicator"]},
+    "created_at": {"type": "string", "format": "date-time"}
+  },
+  "additionalProperties": true
+}

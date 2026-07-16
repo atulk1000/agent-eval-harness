@@ -7,13 +7,17 @@ on:
 jobs:
   test:
     runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.11", "3.12"]
 
     steps:
       - uses: actions/checkout@v4
 
       - uses: actions/setup-python@v5
         with:
-          python-version: "3.11"
+          python-version: ${{ matrix.python-version }}
 
       - name: Install package
         run: |
@@ -23,5 +27,19 @@ jobs:
       - name: Compile
         run: python -m compileall agenteval agents tests
 
+      - name: Lint
+        run: ruff check agenteval agents tests
+
       - name: Test
         run: python -m unittest discover -s tests
+
+      - name: CLI smoke test
+        run: |
+          agenteval run benchmarks/customer_risk.yaml --agent baseline_agent --out "${RUNNER_TEMP}/baseline"
+          agenteval run benchmarks/customer_risk.yaml --agent improved_agent --out "${RUNNER_TEMP}/improved"
+          agenteval validate --trace tests/fixtures/valid_trace.jsonl
+          agenteval adapt-pca --responses examples/public_company_research_assistant/raw_responses.jsonl --benchmark examples/public_company_research_assistant/benchmark.json --out-trace "${RUNNER_TEMP}/pca-traces.jsonl"
+          agenteval score --trace "${RUNNER_TEMP}/pca-traces.jsonl" --benchmark examples/public_company_research_assistant/benchmark.json --agent-name public_company_research_assistant --out "${RUNNER_TEMP}/pca-score"
+          agenteval build-calibration --out "${RUNNER_TEMP}/calibration"
+          agenteval calibrate --dataset "${RUNNER_TEMP}/calibration" --out "${RUNNER_TEMP}/calibration-report"
+          python -m pip check

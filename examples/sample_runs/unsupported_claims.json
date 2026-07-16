@@ -1,34 +1,76 @@
 [
   {
-    "claim": "Discounts above 10 percent are automatically approved",
-    "evidence_refs": [],
-    "reason": "The policy requires VP approval and supporting evidence.",
-    "severity": "high",
-    "task_id": "rag_enterprise_discount_policy",
-    "verdict": "unsupported"
-  },
-  {
-    "claim": "A customer has already churned",
-    "evidence_refs": [],
-    "reason": "The trace supports renewal risk, not confirmed churn.",
+    "claim": "Acme Health has already churned",
+    "claim_id": "claim_hybrid_decline_and_renewal_risk_02_7fc2816b",
+    "evidence_refs": [
+      "evidence_997222da6eda",
+      "evidence_22bb27ba6294",
+      "evidence_6a8385930d55"
+    ],
+    "reason": "The trace does not contain the source type required to evaluate this claim.",
     "severity": "high",
     "task_id": "hybrid_decline_and_renewal_risk",
-    "verdict": "unsupported"
+    "verdict": "not_enough_evidence"
   },
   {
-    "claim": "Discounts were already approved",
-    "evidence_refs": [],
-    "reason": "The policy states requirements before approval; no trace evidence says a discount was approved.",
+    "claim": "Most tickets were resolved",
+    "claim_id": "claim_hybrid_usage_drop_and_support_co_02_d288ecce",
+    "evidence_refs": [
+      "evidence_1a297b5441e5",
+      "evidence_1ed38b6aed89"
+    ],
+    "reason": "The trace does not contain the source type required to evaluate this claim.",
+    "severity": "medium",
+    "task_id": "hybrid_usage_drop_and_support_context",
+    "verdict": "not_enough_evidence"
+  },
+  {
+    "claim": "rollout blockers remain for two departments.",
+    "claim_id": "claim_hybrid_usage_drop_and_support_co_03_d740f5d6",
+    "evidence_refs": [
+      "evidence_1a297b5441e5",
+      "evidence_1ed38b6aed89"
+    ],
+    "reason": "The trace does not contain the source type required to evaluate this claim.",
+    "severity": "low",
+    "task_id": "hybrid_usage_drop_and_support_context",
+    "verdict": "not_enough_evidence"
+  },
+  {
+    "claim": "OmniManufacturing opened high-severity tickets about integration and data sync failures.",
+    "claim_id": "claim_hybrid_usage_drop_and_support_co_04_fc60feab",
+    "evidence_refs": [
+      "evidence_1ed38b6aed89",
+      "evidence_1a297b5441e5"
+    ],
+    "reason": "The trace does not contain the source type required to evaluate this claim.",
+    "severity": "low",
+    "task_id": "hybrid_usage_drop_and_support_context",
+    "verdict": "not_enough_evidence"
+  },
+  {
+    "claim": "Approved discounts can be offered.",
+    "claim_id": "claim_hybrid_discount_candidates_evide_02_5a7efcb8",
+    "evidence_refs": [
+      "evidence_c781c48dceb3",
+      "evidence_aaf26c990a44"
+    ],
+    "reason": "The trace does not contain the source type required to evaluate this claim.",
     "severity": "high",
     "task_id": "hybrid_discount_candidates_evidence",
-    "verdict": "unsupported"
+    "verdict": "not_enough_evidence"
   },
   {
-    "claim": "A declining revenue customer has already churned",
-    "evidence_refs": [],
-    "reason": "Retrieved notes do not confirm churn.",
+    "claim": "Acme Health has already churned",
+    "claim_id": "claim_hybrid_revenue_decline_without_c_02_75d6853f",
+    "evidence_refs": [
+      "evidence_6173c1872d0c",
+      "evidence_4a6927462e70",
+      "evidence_41b685e9b782"
+    ],
+    "reason": "The trace does not contain the source type required to evaluate this claim.",
     "severity": "high",
     "task_id": "hybrid_revenue_decline_without_churn_overclaim",
-    "verdict": "unsupported"
+    "verdict": "not_enough_evidence"
   }
 ]

@@ -14,7 +14,12 @@ def score_efficiency(task: dict[str, Any], run: dict[str, Any]) -> dict[str, Any
         return {"score": 1.0, "tool_calls": calls, "failure_labels": []}
     max_calls = int(max_tool_calls)
     if calls <= max_calls:
-        return {"score": 1.0, "tool_calls": calls, "max_tool_calls": max_calls, "failure_labels": []}
+        return {
+            "score": 1.0,
+            "tool_calls": calls,
+            "max_tool_calls": max_calls,
+            "failure_labels": [],
+        }
     return {
         "score": round(max_calls / max(calls, 1), 3),
         "tool_calls": calls,

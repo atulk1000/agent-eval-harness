@@ -1,0 +1,37 @@
+{
+  "case_count": 100,
+  "gates": {
+    "claim_extraction_precision": {
+      "status": "not_evaluated"
+    },
+    "claim_extraction_recall": {
+      "status": "not_evaluated"
+    },
+    "cohen_kappa": {
+      "status": "not_evaluated"
+    },
+    "evidence_reference_f1": {
+      "status": "not_evaluated"
+    },
+    "high_severity_false_negatives": {
+      "status": "not_evaluated"
+    },
+    "structured_output_validity": {
+      "status": "not_evaluated"
+    },
+    "unsupported_contradicted_recall": {
+      "status": "not_evaluated"
+    },
+    "verdict_macro_f1": {
+      "status": "not_evaluated"
+    }
+  },
+  "gold_count": 0,
+  "limitations": [
+    "No adjudicated human gold labels are available."
+  ],
+  "paired_count": 0,
+  "proposal_count": 100,
+  "schema_version": "1.0",
+  "status": "pending_human_review"
+}

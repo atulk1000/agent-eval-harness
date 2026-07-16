@@ -1,0 +1,13 @@
+{
+  "claim_count": 5,
+  "evidence_count": 6,
+  "hard_gate_failure_count": 0,
+  "judge_call_count": 0,
+  "needs_review_count": 1,
+  "schema_version": "1.0",
+  "verdict_counts": {
+    "not_enough_evidence": 1,
+    "partially_supported": 2,
+    "supported": 2
+  }
+}

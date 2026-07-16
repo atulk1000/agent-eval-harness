@@ -1,4 +1,6 @@
-# Public Company Research Assistant Adapter Plan
+# Public Company Research Assistant Adapter
+
+Status: Implemented in AgentEval 1.2.0
 
 ## Source Repo
 
@@ -46,15 +48,17 @@ Recommended mapping:
 | citations | final answer text or evidence refs |
 | route mismatch note | score/failure metadata |
 
-## Required PCA Exporter Change
+## Implemented Capture Path
 
-Add an optional trace-export mode to PCA's `evals/run_eval.py`:
+No PCA source change is required. AgentEval's standalone capture worker imports PCA's public `answer_question` function inside PCA's own Python environment and stores the raw response:
 
 ```powershell
-python evals/run_eval.py --export-agenteval-trace out/pca_trace.jsonl
+python -m agenteval.cli capture-pca --pca-repo ../public-company-research-assistant --pca-python ../public-company-research-assistant/.venv/Scripts/python.exe --benchmark examples/public_company_research_assistant/benchmark.json --out-responses runs/pca/raw_responses.jsonl
 ```
 
-For each case, export one AgentEval-compatible run object:
+The offline adapter then converts raw response objects into AgentEval-compatible run objects. This split lets capture use PCA dependencies while validation and scoring remain standard-library-only.
+
+Example adapted run object:
 
 ```json
 {
@@ -88,19 +92,21 @@ For each case, export one AgentEval-compatible run object:
 }
 ```
 
-## AgentEval Side Change
+## AgentEval Commands
 
-AgentEval already supports trace import:
+AgentEval adapts, validates, and scores the response file:
 
 ```powershell
-python -m agenteval.cli score --trace path/to/traces.jsonl --benchmark path/to/benchmark.yaml --agent-name external_trace
+python -m agenteval.cli adapt-pca --responses runs/pca/raw_responses.jsonl --benchmark examples/public_company_research_assistant/benchmark.json --out-trace runs/pca/traces.jsonl
+python -m agenteval.cli validate --trace runs/pca/traces.jsonl
+python -m agenteval.cli score --trace runs/pca/traces.jsonl --benchmark examples/public_company_research_assistant/benchmark.json --agent-name public_company_research_assistant --out runs/pca-scored
 ```
 
-v1.2 can add a dedicated PCA adapter only after PCA exports enough trace detail to avoid fabricating evidence.
+Summary-only PCA reports are rejected because they do not contain the SQL rows or retrieved chunks required for evidence-level scoring.
 
 ## Acceptance Criteria For Full Integration
 
-- PCA exports AgentEval-compatible JSONL traces.
+- AgentEval captures PCA raw responses and adapts them to versioned JSONL traces.
 - AgentEval scores at least one SQL-only, one RAG-only, and one hybrid PCA case.
 - The imported PCA score report shows route mismatch, SQL evidence, retrieval evidence, and citation/faithfulness metadata.
 - No sample trace claims to contain evidence that PCA did not actually export.

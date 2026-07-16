@@ -1,0 +1,78 @@
+{
+  "suite_id": "public_company_research_assistant_bridge_v1",
+  "name": "PCA Independent Proof Contract",
+  "description": "SQL, RAG, and hybrid tasks used to validate the external-agent adapter.",
+  "tasks": [
+    {
+      "id": "pca_sql_margin",
+      "task_type": "sql_only",
+      "prompt": "Which company had the highest operating margin in the latest reported quarter?",
+      "allowed_tools": ["sql_query"],
+      "expected_route": {
+        "required_tools": ["sql_query"],
+        "optional_tools": [],
+        "forbidden_tools": ["rag_search", "document_lookup"],
+        "max_tool_calls": 1
+      },
+      "expected_sql": {
+        "required_tables": ["company_metrics"],
+        "expected_entities": ["MSFT"],
+        "unexpected_entities": []
+      },
+      "expected_documents": {"relevant_doc_ids": []},
+      "expected_answer_terms": [],
+      "unsupported_claim_traps": [],
+      "rubric": {"tool_routing": 3, "sql_correctness": 4, "trace_health": 2, "efficiency": 1},
+      "metadata": {"pca_live_analysis": false}
+    },
+    {
+      "id": "pca_rag_ai_themes",
+      "task_type": "rag_only",
+      "prompt": "What themes dominate Alphabet's latest management commentary around AI?",
+      "allowed_tools": ["rag_search"],
+      "expected_route": {
+        "required_tools": ["rag_search"],
+        "optional_tools": [],
+        "forbidden_tools": ["sql_query", "document_lookup"],
+        "max_tool_calls": 1
+      },
+      "expected_sql": {"required_tables": [], "expected_entities": [], "unexpected_entities": []},
+      "expected_documents": {"relevant_doc_ids": ["GOOGL_10-Q_ai_commentary_1"]},
+      "expected_answer_terms": [],
+      "unsupported_claim_traps": [],
+      "rubric": {"tool_routing": 3, "retrieval_grounding": 4, "trace_health": 2, "efficiency": 1},
+      "metadata": {"pca_live_analysis": false}
+    },
+    {
+      "id": "pca_hybrid_cloud",
+      "task_type": "hybrid_sql_rag",
+      "prompt": "Compare Microsoft and Amazon on cloud-related narrative and revenue trend.",
+      "allowed_tools": ["sql_query", "rag_search"],
+      "expected_route": {
+        "required_tools": ["sql_query", "rag_search"],
+        "optional_tools": [],
+        "forbidden_tools": ["document_lookup"],
+        "max_tool_calls": 2
+      },
+      "expected_sql": {
+        "required_tables": ["company_metrics"],
+        "expected_entities": ["MSFT", "AMZN"],
+        "unexpected_entities": []
+      },
+      "expected_documents": {
+        "relevant_doc_ids": ["MSFT_10-Q_cloud_1", "AMZN_10-Q_cloud_1"]
+      },
+      "expected_answer_terms": [],
+      "unsupported_claim_traps": [],
+      "rubric": {
+        "tool_routing": 2,
+        "sql_correctness": 2,
+        "retrieval_grounding": 2,
+        "synthesis": 2,
+        "trace_health": 1,
+        "efficiency": 1
+      },
+      "metadata": {"pca_live_analysis": false}
+    }
+  ]
+}
